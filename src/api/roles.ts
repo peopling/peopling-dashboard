@@ -12,7 +12,7 @@ export const createRole = (data: any) =>
     url: '/roles',
     method: 'post',
     data
-  })
+  }) 
 
 export const updateRole = (id: number, data: any) =>
   request({

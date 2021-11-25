@@ -9,7 +9,7 @@ const mockServerPort = 9528 // TODO: get this variable from setting.ts
 const name = 'Peopling Dashboard' // TODO: get this variable from setting.ts
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/vue-typescript-admin-template/' : '/',
+  publicPath: '/',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
