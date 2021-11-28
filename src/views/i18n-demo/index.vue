@@ -53,6 +53,12 @@
           >
             Italiano
           </el-radio>
+          <el-radio
+            label="tr"
+            border
+          >
+            Türkçe
+          </el-radio>
         </el-radio-group>
         <el-tag
           style="margin-top: 15px; display: block;"

@@ -18,6 +18,12 @@ const roles: IRoleData[] = [
     routes: routes.filter(i => i.path !== '/permission') // Just a mock
   },
   {
+    key: 'peopling-admin',
+    name: 'peopling-admin',
+    description: 'Super Administrator. Have access to view all pages.',
+    routes: routes // Just a mock
+  },
+  {
     key: 'visitor',
     name: 'visitor',
     description: 'Just a visitor. Can only see the home page and the document page',

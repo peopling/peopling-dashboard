@@ -92,7 +92,7 @@
             class="permission-sourceCode"
             type="info"
           >
-            v-if="checkPermission(['admin'])"
+            v-if="checkPermission(['admin')"
           </el-tag>
         </el-tab-pane>
 

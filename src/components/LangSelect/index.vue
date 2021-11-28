@@ -11,12 +11,12 @@
       />
     </div>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item
+      <!-- <el-dropdown-item
         :disabled="language==='zh'"
         command="zh"
       >
         中文
-      </el-dropdown-item>
+      </el-dropdown-item> -->
       <el-dropdown-item
         :disabled="language==='en'"
         command="en"
@@ -24,29 +24,35 @@
         English
       </el-dropdown-item>
       <el-dropdown-item
+        :disabled="language==='tr'"
+        command="tr"
+      >
+        Türkçe
+      </el-dropdown-item>
+      <!-- <el-dropdown-item
         :disabled="language==='es'"
         command="es"
       >
         Español
-      </el-dropdown-item>
-      <el-dropdown-item
+      </el-dropdown-item> -->
+      <!-- <el-dropdown-item
         :disabled="language==='ja'"
         command="ja"
       >
         日本語
-      </el-dropdown-item>
-      <el-dropdown-item
+      </el-dropdown-item> -->
+      <!-- <el-dropdown-item
         :disabled="language==='ko'"
         command="ko"
       >
         한국어
-      </el-dropdown-item>
-      <el-dropdown-item
+      </el-dropdown-item> -->
+      <!-- <el-dropdown-item
         :disabled="language==='it'"
         command="it"
       >
         Italiano
-      </el-dropdown-item>
+      </el-dropdown-item> -->
     </el-dropdown-menu>
   </el-dropdown>
 </template>
@@ -67,7 +73,7 @@ export default class extends Vue {
     this.$i18n.locale = lang
     AppModule.SetLanguage(lang)
     document.documentElement.lang = lang
-    const title = this.$route.meta.title ? `${this.$t(`route.${this.$route.meta.title}`)} - ${settings.title}` : `${settings.title}`
+    const title = this.$route.meta?.title ? `${this.$t(`route.${this.$route.meta.title}`)} - ${settings.title}` : `${settings.title}`
     document.title = title
     this.$message({
       message: this.$t('components.changeLanguageTips').toString(),

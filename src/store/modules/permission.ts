@@ -5,7 +5,7 @@ import store from '@/store'
 
 const hasPermission = (roles: string[], route: RouteConfig) => {
   if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.includes(role))
+    return roles.some(role => route.meta?.roles.includes(role))
   } else {
     return true
   }
@@ -44,7 +44,7 @@ class Permission extends VuexModule implements IPermissionState {
   @Action
   public GenerateRoutes(roles: string[]) {
     let accessedRoutes
-    if (roles.includes('admin')) {
+    if (roles.includes('admin') || roles.includes('peopling-admin')) {
       accessedRoutes = asyncRoutes
     } else {
       accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
