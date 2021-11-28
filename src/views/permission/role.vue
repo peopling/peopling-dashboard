@@ -187,7 +187,8 @@ export default class extends Vue {
         title: '',
         path: ''
       }
-      tmp.title = this.$t(`route.${route.meta.title}`).toString()
+      
+      tmp.title = this.$t(`route.${route.meta?.title}`).toString()
       tmp.path = route.path
       if (route.children) {
         tmp.children = this.generateTreeData(route.children)
@@ -349,7 +350,7 @@ export default class extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped> 
 .app-container {
   .roles-table {
     margin-top: 30px;

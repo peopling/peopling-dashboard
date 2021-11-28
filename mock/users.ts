@@ -24,11 +24,22 @@ const userList: IUserData[] = [
     email: 'editor@test.com',
     phone: '1234567890',
     roles: ['editor']
-  }
+  },
+  {
+    id: 2,
+    username: 'peopling-admin',
+    password: 'any',
+    name: 'Super Admin',
+    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    introduction: 'I am a peopling administrator',
+    email: 'peopling@test.com',
+    phone: '1234567890',
+    roles: ['peopling-admin']
+  },
 ]
 const userCount = 100
 
-for (let i = 2; i < userCount; i++) {
+for (let i = 3; i < userCount; i++) {
   userList.push({
     id: i,
     username: 'user_' + faker.random.alphaNumeric(9),

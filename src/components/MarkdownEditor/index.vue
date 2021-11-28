@@ -10,6 +10,7 @@ import '@toast-ui/editor/dist/i18n/it-it'
 import '@toast-ui/editor/dist/i18n/ja-jp'
 import '@toast-ui/editor/dist/i18n/ko-kr'
 import '@toast-ui/editor/dist/i18n/zh-cn'
+import '@toast-ui/editor/dist/i18n/tr-tr'
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import Editor, { EditorOptions } from '@toast-ui/editor'
 import defaultOptions from './default-options'
@@ -36,7 +37,8 @@ export default class extends Vue {
     es: 'es',
     ja: 'ja',
     ko: 'ko',
-    it: 'it'
+    it: 'it',
+    tr: 'tr'
   }
 
   get editorOptions() {

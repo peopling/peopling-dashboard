@@ -81,26 +81,8 @@
           <span>{{ $t('login.password') }} : {{ $t('login.any') }} </span>
         </div>
 
-        <el-button
-          class="thirdparty-button"
-          type="primary"
-          @click="showDialog=true"
-        >
-          {{ $t('login.thirdparty') }}
-        </el-button>
       </div>
     </el-form>
-
-    <el-dialog
-      :title="$t('login.thirdparty')"
-      :visible.sync="showDialog"
-    >
-      {{ $t('login.thirdpartyTips') }}
-      <br>
-      <br>
-      <br>
-      <social-sign />
-    </el-dialog>
   </div>
 </template>
 
@@ -112,19 +94,17 @@ import { Form as ElForm, Input } from 'element-ui'
 import { UserModule } from '@/store/modules/user'
 import { isValidUsername } from '@/utils/validate'
 import LangSelect from '@/components/LangSelect/index.vue'
-import SocialSign from './components/SocialSignin.vue'
 
 @Component({
   name: 'Login',
   components: {
-    LangSelect,
-    SocialSign
+    LangSelect
   }
 })
 export default class extends Vue {
   private validateUsername = (rule: any, value: string, callback: Function) => {
     if (!isValidUsername(value)) {
-      callback(new Error('Please enter the correct user name'))
+      callback(new Error('Lütfen doğru kullanıcı adını girin'))
     } else {
       callback()
     }
@@ -132,7 +112,7 @@ export default class extends Vue {
 
   private validatePassword = (rule: any, value: string, callback: Function) => {
     if (value.length < 6) {
-      callback(new Error('The password can not be less than 6 digits'))
+      callback(new Error('Şifre 6 haneden az olamaz'))
     } else {
       callback()
     }
@@ -150,7 +130,6 @@ export default class extends Vue {
 
   private passwordType = 'password'
   private loading = false
-  private showDialog = false
   private capsTooltip = false
   private redirect?: string
   private otherQuery: Dictionary<string> = {}

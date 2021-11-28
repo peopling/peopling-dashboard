@@ -10,6 +10,7 @@ import elementEsLocale from 'element-ui/lib/locale/lang/es'
 import elementJaLocale from 'element-ui/lib/locale/lang/ja'
 import elementKoLocale from 'element-ui/lib/locale/lang/ko'
 import elementItLocale from 'element-ui/lib/locale/lang/it'
+import elementTrLocale from 'element-ui/lib/locale/lang/tr-TR'
 
 // User defined lang
 import enLocale from './en'
@@ -18,6 +19,7 @@ import esLocale from './es'
 import jaLocale from './ja'
 import koLocale from './ko'
 import itLocale from './it'
+import trLocale from './tr'
 
 Vue.use(VueI18n)
 
@@ -45,6 +47,10 @@ const messages = {
   it: {
     ...itLocale,
     ...elementItLocale
+  },
+  tr: {
+    ...trLocale,
+    ...elementTrLocale
   }
 }
 
@@ -65,6 +71,7 @@ export const getLocale = () => {
   }
 
   // Default language is english
+  //TODO: tr yaparız!
   return 'en'
 }
 
