@@ -58,6 +58,7 @@ class User extends VuexModule implements IUserState {
   public async Login(userInfo: { username: string, password: string}) {
     let { username, password } = userInfo
     username = username.trim()
+  
     const { data } = await login({ username, password })
 
 
@@ -84,12 +85,6 @@ class User extends VuexModule implements IUserState {
     }
     const { roles, name, avatar, introduction, email } = data.user
 
-
-    // TODO: bizim api gelene kadar burası boyle kalabılır. rolu ezmek için
-    if(roles =="editor"){
-
-      roles[0] ="peopling-admin"
-    }
 
     debugger
     // roles must be a non-empty array
