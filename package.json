@@ -2,9 +2,9 @@
   "name": "peopling-dashboard",
   "version": "1.0.0",
   "private": true,
-  "author": "",
+  "author": "Mert Demirok<mertdemirok@outlook.com>",
   "scripts": {
-    "serve": "concurrently \"npm:mock\" \"vue-cli-service serve\"",
+    "serve": " concurrently \"npm:mock\" \"vue-cli-service serve --mode production\" ",
     "test:unit": "jest --clearCache && vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "build:prod": "vue-cli-service build",
@@ -107,9 +107,6 @@
     "vue-cli-plugin-style-resources-loader": "^0.1.5",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^4.46.0"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
   },
   "keywords": [
     "vue",
