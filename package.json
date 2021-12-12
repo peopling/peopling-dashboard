@@ -108,9 +108,6 @@
     "vue-template-compiler": "^2.6.12",
     "webpack": "^4.46.0"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
   "keywords": [
     "vue",
     "typescript",
