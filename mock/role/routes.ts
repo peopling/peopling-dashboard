@@ -48,39 +48,6 @@ export const constantRoutes = [
         }
       }
     ]
-  },
-  {
-    path: '/documentation',
-    component: 'Layout',
-    children: [
-      {
-        path: 'index',
-        component: 'views/documentation/index',
-        name: 'Documentation',
-        meta: {
-          title: 'documentation',
-          icon: 'documentation',
-          affix: true
-        }
-      }
-    ]
-  },
-  {
-    path: '/guide',
-    component: 'Layout',
-    redirect: '/guide/index',
-    children: [
-      {
-        path: 'index',
-        component: 'views/guide/index',
-        name: 'Guide',
-        meta: {
-          title: 'guide',
-          icon: 'guide',
-          noCache: true
-        }
-      }
-    ]
   }
 ]
 
@@ -92,7 +59,7 @@ export const asyncRoutes = [
     meta: {
       title: 'permission',
       icon: 'lock',
-      roles: ['admin', 'editor','peopling-admin'],
+      roles: ['admin', 'peopling-admin'],
       alwaysShow: true
     },
     children: [
@@ -102,7 +69,7 @@ export const asyncRoutes = [
         name: 'PagePermission',
         meta: {
           title: 'pagePermission',
-          roles: ['admin','peopling-admin']
+          roles: ['admin', 'peopling-admin']
         }
       },
       {
@@ -119,7 +86,7 @@ export const asyncRoutes = [
         name: 'RolePermission',
         meta: {
           title: 'rolePermission',
-          roles: ['admin','peopling-admin']
+          roles: ['admin', 'peopling-admin']
         }
       }
     ]
@@ -342,7 +309,8 @@ export const asyncRoutes = [
     name: 'Table',
     meta: {
       title: 'table',
-      icon: 'table'
+      icon: 'table',
+      roles: ['admin']
     },
     children: [
       {
@@ -515,8 +483,7 @@ export const asyncRoutes = [
     redirect: '/zip/download',
     meta: {
       title: 'zip',
-      icon: 'zip',
-      alwaysShow: true
+      icon: 'zip'
     },
     children: [
       {

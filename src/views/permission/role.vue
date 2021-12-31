@@ -170,6 +170,7 @@ export default class extends Vue {
 
   private async getRoutes() {
     const { data } = await getRoutes({ /* Your params here */ })
+    console.log(data)
     this.serviceRoutes = data.routes
     this.reshapedRoutes = this.reshapeRoutes(data.routes)
   }

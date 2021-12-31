@@ -60,6 +60,9 @@ export default {
     exportZip: 'Export Zip',
     theme: 'Theme',
     clipboard: 'Clipboard',
+    userManagement: 'User Management',
+    companyManagement: 'Company Management',
+    parameters: 'Parameters',
     i18n: 'I18n',
     externalLink: 'External Link',
     profile: 'Profile'

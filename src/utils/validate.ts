@@ -1,4 +1,4 @@
-export const isValidUsername = (str: string) => ['admin', 'editor','peopling-admin'].indexOf(str.trim()) >= 0
+export const isValidUsername = (str: string) => str.includes('admin')
 
 export const isExternal = (path: string) => /^(https?:|mailto:|tel:)/.test(path)
 

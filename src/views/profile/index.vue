@@ -15,12 +15,6 @@
           <el-card>
             <el-tabs v-model="activeTab">
               <el-tab-pane
-                label="Activity"
-                name="activity"
-              >
-                <activity />
-              </el-tab-pane>
-              <el-tab-pane
                 label="Timeline"
                 name="timeline"
               >
@@ -73,7 +67,7 @@ const defaultProfile: IProfile = {
 })
 export default class extends Vue {
   private user = defaultProfile
-  private activeTab = 'activity'
+  private activeTab = 'account'
 
   get name() {
     return UserModule.name

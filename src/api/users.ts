@@ -35,7 +35,7 @@ export const deleteUser = (username: string) =>
 
 export const login = (data: any) =>
   request({
-    url: '/auth/login', //users/login
+    url: 'users/login', //'/auth/login',
     method: 'post',
     data
   })
