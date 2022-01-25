@@ -11,6 +11,8 @@ info:
 servers:
   - url: /mock-api/v1
 tags:
+  - name: employees
+    description: employees data related api.
   - name: articles
     description: Articles data related api.
   - name: roles
@@ -20,6 +22,211 @@ tags:
   - name: users
     description: Users related api.
 paths:
+  /employees:
+    get:
+      tags:
+        - employees
+      summary: Get employee List
+      description: Return a list of employees.
+      operationId: getEmployees
+      parameters:
+        - name: username
+          in: query
+          description: Used to filter employees by username.
+          schema:
+            $ref: '#/components/schemas/employee/properties/username'
+        - name: salaryType
+          in: query
+          description: Used to filter articles by matched salaryType substring.
+          schema:
+            $ref: '#/components/schemas/employee/properties/salaryType'
+        - name: page
+          in: query
+          description: The wanted page number (one page).
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: limit
+          in: query
+          description: The maximum number of employees returned for one page.
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+        - name: sort
+          in: query
+          description: Optional sorting order for employees.
+          schema:
+            type: string
+            enum:
+              - +id
+              - -id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                        format: int32
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/employee'
+    post:
+      tags:
+        - employees
+      summary: Create New employee
+      description: Create a new employee.
+      operationId: createEmployee
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: employee
+          in: query
+          required: true
+          description: The data for new employee.
+          schema:
+            $ref: '#/components/schemas/employee'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/employee'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+  /employees/{id}:
+    get:
+      tags:
+        - employees
+      summary: Get employee Detail
+      description: Get employee detail by ID.
+      operationId: getEmployee
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: employee id.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/Employee'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+        - employees
+      summary: Update employee Detail
+      description: Update employee deatail by ID.
+      operationId: updateEmployee
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: employee id.
+          schema:
+            type: integer
+            format: int64
+        - name: article
+          in: query
+          required: true
+          description: data for the updated employee.
+          schema:
+            $ref: '#/components/schemas/Employee'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/Employee'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - employees
+      summary: Delete employees
+      description: Delete employee by ID.
+      operationId: deleteemployee
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: employee id.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
   /articles:
     get:
       tags:

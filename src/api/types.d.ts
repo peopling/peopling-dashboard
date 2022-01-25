@@ -16,6 +16,16 @@ export interface IArticleData {
   pageviews: number
 }
 
+export interface IEmployeeData {
+  id: number
+  username: string
+  salary:string
+  salaryType: string
+  expenseCenter: string
+  employeeClass: string
+  status: string
+}
+
 export interface IRoleData {
   key: string
   name: string

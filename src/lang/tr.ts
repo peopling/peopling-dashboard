@@ -68,7 +68,7 @@ export default {
     parameters: 'Parametreler'
   },
   navbar: {
-    logOut: 'Log Out',
+    logOut: 'Çıkış',
     dashboard: 'Dashboard',
     github: 'Github',
     theme: 'Theme',
@@ -76,7 +76,7 @@ export default {
     profile: 'Profile'
   },
   login: {
-    title: 'Peopling Dashboard Login',
+    title: 'Peopling Dashboard Girişi',
     logIn: 'Giriş',
     email: 'Kullanıcı Adı',
     password: 'Şifre',
@@ -87,14 +87,14 @@ export default {
     github: 'Github Repository'
   },
   permission: {
-    createRole: 'New Role',
-    editPermission: 'Edit',
+    createRole: 'Yeni Rol',
+    editPermission: 'Güncelle',
     roles: 'Your roles',
     switchRoles: 'Switch roles',
     tips: 'In some cases, using v-permission will have no effect. For example: Element-UI  el-tab or el-table-column and other scenes that dynamically render dom. You can only do this with v-if.',
-    delete: 'Delete',
-    confirm: 'Confirm',
-    cancel: 'Cancel'
+    delete: 'Silindi',
+    confirm: 'Onayla',
+    cancel: 'Iptal'
   },
   guide: {
     description: 'The guide page is useful for some people who entered the project for the first time. You can briefly introduce the features of the project. Demo is based on ',
@@ -114,26 +114,34 @@ export default {
     dynamicTips2: 'Not fixed header, sorted by click order',
     dragTips1: 'The default order',
     dragTips2: 'The after dragging order',
-    title: 'Title',
+    title: 'Başlık',
     importance: 'Importance',
-    type: 'Type',
+    type: 'Tipi',
     remark: 'Remark',
-    search: 'Search',
-    add: 'Add',
-    export: 'Export',
+    search: 'Arama',
+    add: 'Ekle',
+    export: 'Excel Indir',
     reviewer: 'Reviewer',
-    id: 'ID',
-    date: 'Date',
+    id: 'Sicil',
+    date: 'Tarih',
     author: 'Author',
     readings: 'Readings',
-    status: 'Status',
-    actions: 'Actions',
-    edit: 'Edit',
+    status: 'Durumu',
+    salary: 'Maaş',
+    salaryType: 'Ücret Tipi',
+    expenseCenter: 'Masraf Merkezi',
+    employeeClass: 'Personel Sınıfı',
+    actions: 'Aksiyonlar',
+    edit: 'Düzenle',
     publish: 'Publish',
     draft: 'Draft',
-    delete: 'Delete',
-    cancel: 'Cancel',
-    confirm: 'Confirm'
+    delete: 'Sil',
+    deleted: 'Silindi',
+    cancel: 'Iptal',
+    confirm: 'Onayla',
+    username: 'İsim Soyisim',
+    active: 'Aktif',
+    passive: 'Pasif'
   },
   example: {
     warning: 'Creating and editing pages cannot be cached by keep-alive because keep-alive\'s \'include\' currently does not support caching based on routes, so now it\'s cached based on component name. If you want to achieve a similar caching effect, you can use a browser caching scheme such as localStorage. Or don\'t use keep-alive\'s \'include\' to cache all pages directly. See details'
@@ -156,15 +164,15 @@ export default {
     tips: 'Here we use window.print() to implement the feature of downloading PDF.'
   },
   theme: {
-    change: 'Change Theme',
+    change: 'Tema Değiştir',
     documentation: 'Theme documentation',
     tips: 'Tips: It is different from the theme-pick on the navbar is two different skinning methods, each with different application scenarios. Refer to the documentation for details.'
   },
   tagsView: {
-    refresh: 'Refresh',
-    close: 'Close',
-    closeOthers: 'Close Others',
-    closeAll: 'Close All'
+    refresh: 'Yenile',
+    close: 'Kapat',
+    closeOthers: 'Diğerlerini Kapat',
+    closeAll: 'Tümünü Kapat'
   },
   settings: {
     title: 'Page style setting',

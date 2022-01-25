@@ -8,7 +8,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
-  name: 'user-management'
+  name: 'parameters'
 })
 export default class extends Vue {
 
