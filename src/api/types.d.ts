@@ -26,6 +26,14 @@ export interface IEmployeeData {
   status: string
 }
 
+export interface ICompanyData {
+  id: number
+  companyname: string
+  vkn: number
+  address: string
+  status: string
+}
+
 export interface IRoleData {
   key: string
   name: string

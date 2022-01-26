@@ -22,7 +22,7 @@ export const getEmployees = (req: Request, res: Response) => {
 
   let mockList = employeeList.filter(item => {
     if (salaryType && item.salaryType !== salaryType) return false
-    if (username && item.username.indexOf(username as string) < 0) return false
+    if (username && item.username.toLocaleLowerCase().indexOf((username as string).toLocaleLowerCase()) < 0) return false
     if (status && item.status !== status) return false
     return true
   })

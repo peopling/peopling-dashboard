@@ -190,7 +190,7 @@
             {{ $t('table.passive') }}
           </el-button>
           <el-button
-            v-if="row.status!=='deleted'"
+            v-if="row.status!=='deleted' && row.status !== 'active'"
             size="mini"
             type="danger"
             @click="handleDelete(row, $index)"

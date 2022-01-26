@@ -227,6 +227,216 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         404:
           $ref: '#/components/responses/NotFound'
+  /companies:
+    get:
+      tags:
+        - companies
+      summary: Get company List
+      description: Return a list of companies.
+      operationId: getCompanies
+      parameters:
+        - name: username
+          in: query
+          description: Used to filter companies by companyname.
+          schema:
+            $ref: '#/components/schemas/company/properties/companyname'
+        - name: status
+          in: query
+          description: Used to filter companies by status.
+          schema:
+            $ref: '#/components/schemas/company/properties/status'
+        - name: salaryType
+          in: query
+          description: Used to filter companies by salaryType.
+          schema:
+            $ref: '#/components/schemas/company/properties/salaryType'
+        - name: page
+          in: query
+          description: The wanted page number (one page).
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: limit
+          in: query
+          description: The maximum number of companies returned for one page.
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+        - name: sort
+          in: query
+          description: Optional sorting order for companies.
+          schema:
+            type: string
+            enum:
+              - +id
+              - -id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                        format: int32
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Company'
+    post:
+      tags:
+        - companies
+      summary: Create New company
+      description: Create a new company.
+      operationId: createCompany
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: company
+          in: query
+          required: true
+          description: The data for new company.
+          schema:
+            $ref: '#/components/schemas/Company'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/Company'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+  /companies/{id}:
+    get:
+      tags:
+        - companies
+      summary: Get company Detail
+      description: Get company detail by ID.
+      operationId: getCompany
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: company id.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/Company'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+        - companies
+      summary: Update company Detail
+      description: Update company deatail by ID.
+      operationId: updateCompany
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: company id.
+          schema:
+            type: integer
+            format: int64
+        - name: article
+          in: query
+          required: true
+          description: data for the updated company.
+          schema:
+            $ref: '#/components/schemas/Company'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/Company'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - companies
+      summary: Delete companies
+      description: Delete company by ID.
+      operationId: deletecompany
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: company id.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
   /articles:
     get:
       tags:
