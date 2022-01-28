@@ -62,6 +62,8 @@ export default {
     clipboard: 'Clipboard',
     userManagement: 'User Management',
     companyManagement: 'Company Management',
+    budgetManagement: 'Budget Management',
+    reports: 'Reports',
     parameters: 'Parameters',
     i18n: 'I18n',
     externalLink: 'External Link',

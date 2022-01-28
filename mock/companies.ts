@@ -11,7 +11,7 @@ for (let i = 0; i < companyCount; i++) {
     status: faker.random.arrayElement(['active', 'passive', 'deleted']),
     companyname: faker.company.companyName(),
     address: faker.address.streetAddress() + faker.address.city() + faker.address.country(),
-    vkn: faker.datatype.number({ min: 10000, max: 90000 })
+    vkn: faker.datatype.number({ min: 10000, max: 90000 }).toString()
   })
 }
 
@@ -20,7 +20,7 @@ export const getCompanies = (req: Request, res: Response) => {
 
   console.log(req.query)
   let mockList = companyList.filter(item => {
-    if (vkn && (item.vkn === 0 || item.vkn == null)) return false
+    if (vkn && item.vkn.toLocaleLowerCase().indexOf((vkn as string).toLocaleLowerCase()) < 0) return false
     if (address && item.address.toLocaleLowerCase().indexOf((address as string).toLocaleLowerCase()) < 0) return false
     if (companyname && item.companyname.toLocaleLowerCase().indexOf((companyname as string).toLocaleLowerCase()) < 0) return false
     if (status && item.status !== status) return false

@@ -1,20 +1,14 @@
 /* eslint-disable padded-blocks */
 <template>
   <div class="app-container">
-      <el-empty description="" v-if="false"></el-empty>
-       <el-button
-            type="success"
-            icon="el-icon-check"
-            @click="createMode()"
-          >
-          </el-button>
-      <el-tooltip
-      content="Click on any of the cells or on the edit button to edit content"
-    >
-      <i style="" class="el-icon-info"></i>
-    
-    </el-tooltip>
-    <el-table :data="gridData" style="width: 100%">
+      <el-empty description="" v-if="isEmpty"></el-empty>
+      <el-button
+          type="success"
+          icon="el-icon-plus"
+          @click="createMode()"
+        >
+      </el-button>
+    <el-table :data="gridData" style="width: 100%" v-if="!isEmpty">
       <el-table-column label="Operations" min-width="180">
         <template slot-scope="{row, index}">
           <el-button icon="el-icon-edit" @click="setEditMode(row, index)">
@@ -23,6 +17,12 @@
             type="success"
             icon="el-icon-check"
             @click="saveRow(row, index)"
+          >
+          </el-button>
+          <el-button
+            type="danger"
+            icon="el-icon-minus"
+            @click="deleteRow(row, index)"
           >
           </el-button>
         </template>
@@ -38,15 +38,15 @@
         >
           <el-tag
             size="medium"
-            :type="row.key === 'M' ? 'primary' : 'danger'"
+            :type="row.key === 'Integer' ? 'primary' : 'danger'"
             slot="content"
           >
-            {{ row.key === "M" ? "Male" : "Female" }}
+            {{ row.key === "Integer" ? "Integer" : "String" }}
           </el-tag>
 
           <template slot="edit-component-slot">
-            <el-option value="M" label="Male"></el-option>
-            <el-option value="F" label="Female"></el-option>
+            <el-option value="Integer" label="Integer"></el-option>
+            <el-option value="String" label="String"></el-option>
           </template>
         </editable-cell>
       </el-table-column>
@@ -75,32 +75,39 @@ import EditableCell from './components/EditableCell.vue'
     EditableCell
   }
 })
+
 // eslint-disable-next-line padded-blocks
 export default class extends Vue {
 
+private isEmpty = false
+
  private gridData = [
    {
-     value: 'Tom',
-     key: 'M'
+     value: 'user Managment',
+     key: 'Integer'
    },
    {
-     value: 'Lisa',
-     key: 'F'
+     value: 'user Managment',
+     key: 'Integer'
    },
    {
-     value: 'Jon',
-     key: 'M'
+     value: 'bütçe',
+     key: 'String'
    },
    {
-     value: 'Mary',
-     key: 'F'
+     value: 'param Value Test',
+     key: 'String'
+   },
+   {
+     value: 'param Value Test 1',
+     key: 'String'
    }
  ]
 
  createMode() {
    this.gridData.push({
      value: ' ',
-     key: ' '
+     key: 'String'
    })
  }
 
@@ -112,8 +119,27 @@ export default class extends Vue {
    row.editMode = false
  }
 
+ deleteRow(row: { editMode: boolean }, index: any) {
+   this.$notify({
+     title: 'Success',
+     message: 'Delete Successfully',
+     type: 'success',
+     duration: 2000
+   })
+   this.gridData.splice(index, 1)
+
+   if (this.gridData.length === 0) {
+     this.isEmpty = true
+   }
+ }
+
  mounted() {
    this.gridData = this.gridData.map((row: any) => {
+
+
+   if (this.gridData.length === 0) {
+     this.isEmpty = true
+   }
      return {
        ...row,
        editMode: false

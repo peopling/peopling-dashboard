@@ -65,7 +65,9 @@ export default {
     profile: 'Profile',
     userManagement: 'Kullanıcı Yönetimi',
     companyManagement: 'Şirket Yönetimi',
-    parameters: 'Parametreler'
+    parameters: 'Parametreler',
+    budgetManagement: 'Bütçe Yönetimi',
+    reports: 'Raporlar'
   },
   navbar: {
     logOut: 'Çıkış',

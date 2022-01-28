@@ -746,6 +746,43 @@ const asyncPeoplingRoutes: RouteConfig[] = [
         }
       }
     ]
+  },
+  {
+    path: '/budget-managment',
+    component: Layout,
+    redirect: 'noredirect',
+    meta: {
+      roles: ['peopling-admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import(/* webpackChunkName: "clipboard" */ '@/views/budget-managment/index.vue'),
+        name: 'budget-managment',
+        meta: {
+          title: 'budgetManagement',
+          icon: 'money'
+        }
+      }
+    ]
+  }, {
+    path: '/reports',
+    component: Layout,
+    redirect: 'noredirect',
+    meta: {
+      roles: ['peopling-admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import(/* webpackChunkName: "clipboard" */ '@/views/reports/index.vue'),
+        name: 'reports',
+        meta: {
+          title: 'reports',
+          icon: 'skill'
+        }
+      }
+    ]
   }
 ]
 

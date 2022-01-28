@@ -4,7 +4,7 @@ import { ICompanyData } from './types'
 export const defaultCompanyData: ICompanyData = {
   id: 0,
   companyname: '',
-  vkn: 0,
+  vkn: '',
   address: '',
   status: ''
 }

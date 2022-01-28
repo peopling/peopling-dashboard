@@ -29,7 +29,7 @@ export interface IEmployeeData {
 export interface ICompanyData {
   id: number
   companyname: string
-  vkn: number
+  vkn: string
   address: string
   status: string
 }
