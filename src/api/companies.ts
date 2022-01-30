@@ -6,7 +6,8 @@ export const defaultCompanyData: ICompanyData = {
   companyname: '',
   vkn: '',
   address: '',
-  status: ''
+  status: '',
+  logoUrl: ''
 }
 
 export const getCompanies = (params: any) =>

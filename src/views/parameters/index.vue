@@ -135,11 +135,9 @@ private isEmpty = false
 
  mounted() {
    this.gridData = this.gridData.map((row: any) => {
-
-
-   if (this.gridData.length === 0) {
-     this.isEmpty = true
-   }
+     if (this.gridData.length === 0) {
+       this.isEmpty = true
+     }
      return {
        ...row,
        editMode: false

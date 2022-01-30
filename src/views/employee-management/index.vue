@@ -2,32 +2,32 @@
   <div class="app-container">
     <div class="filter-container">
       <el-input
-        v-model="listQuery.companyname"
-        :placeholder="$t('table.companyname')"
-        style="width: 200px; padding-right: 15px"
-        class="filter-item"
-        @keyup.enter.native="handleFilter"
-      />
-      <el-input
-        v-model="listQuery.address"
-        :placeholder="$t('table.address')"
-        style="width: 200px; padding-right: 15px"
-        class="filter-item"
-        @keyup.enter.native="handleFilter"
-      />
-      <el-input
-        v-model="listQuery.vkn"
-        :placeholder="$t('table.vkn')"
-        style="width: 200px; padding-right: 15px"
+        v-model="listQuery.username"
+        :placeholder="$t('table.username')"
+        style="width: 200px; padding-right: 15px;"
         class="filter-item"
         @keyup.enter.native="handleFilter"
       />
       <el-select
+        v-model="listQuery.salaryType"
+        :placeholder="$t('table.salaryType')"
+        clearable
+        class="filter-item"
+        style="width: 130px; padding-right: 15px;"
+      >
+        <el-option
+          v-for="item in calendarTypeOptions"
+          :key="item.key"
+          :label="item.displayName+'('+item.key+')'"
+          :value="item.key"
+        />
+      </el-select>
+            <el-select
         v-model="listQuery.status"
         :placeholder="$t('table.status')"
         clearable
         class="filter-item"
-        style="width: 130px; padding-right: 15px"
+        style="width: 130px; padding-right: 15px;"
       >
         <el-option
           v-for="item in statusOptions"
@@ -38,7 +38,7 @@
       </el-select>
       <el-select
         v-model="listQuery.sort"
-        style="width: 140px; padding-right: 15px"
+        style="width: 140px; padding-right: 15px;"
         class="filter-item"
         @change="handleFilter"
       >
@@ -56,16 +56,16 @@
         icon="el-icon-search"
         @click="handleFilter"
       >
-        {{ $t("table.search") }}
+        {{ $t('table.search') }}
       </el-button>
       <el-button
         class="filter-item"
-        style="margin-left: 10px"
+        style="margin-left: 10px;"
         type="primary"
         icon="el-icon-edit"
         @click="handleCreate"
       >
-        {{ $t("table.add") }}
+        {{ $t('table.add') }}
       </el-button>
       <el-button
         v-waves
@@ -75,7 +75,7 @@
         icon="el-icon-download"
         @click="handleDownload"
       >
-        {{ $t("table.export") }}
+        {{ $t('table.export') }}
       </el-button>
     </div>
 
@@ -86,11 +86,11 @@
       border
       fit
       highlight-current-row
-      style="width: 100%"
+      style="width: 100%;"
       @sort-change="sortChange"
     >
       <el-table-column
-        :label="$t('table.companyId')"
+        :label="$t('table.id')"
         prop="id"
         sortable="custom"
         align="center"
@@ -102,38 +102,51 @@
         </template>
       </el-table-column>
       <el-table-column
-        :label="$t('table.logo')"
-        width="90px"
+        :label="$t('table.username')"
+        width="180%"
+
+      >
+        <template slot-scope="{row}">
+          <span
+            class="link-type"
+            @click="handleUpdate(row)"
+          >{{ row.username }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        :label="$t('table.salary')"
+        width="100px"
         align="center"
       >
         <template slot-scope="{row}">
-          <img
-           width="40px"
-           height="40px"
-          :src= row.logoUrl
-          class="sidebar-logo">
+          <span>{{ row.salary }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('table.companyname')" width="180%">
-        <template slot-scope="{row}">
-          <span class="link-type" @click="handleUpdate(row)">{{
-            row.companyname
-          }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column :label="$t('table.vkn')" width="100px" align="center">
-        <template slot-scope="{row}">
-          <span>{{ row.vkn }}</span>
-        </template>
-      </el-table-column>
-
       <el-table-column
-        :label="$t('table.address')"
+        :label="$t('table.expenseCenter')"
         width="180px"
         align="center"
       >
         <template slot-scope="{row}">
-          <span>{{ row.address }}</span>
+          <span>{{ row.expenseCenter }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        :label="$t('table.employeeClass')"
+        width="82px"
+        align="center"
+      >
+        <template slot-scope="{row}">
+          <span>{{ row.employeeClass }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        :label="$t('table.salaryType')"
+        width="100px"
+        align="center"
+      >
+        <template slot-scope="{row}">
+          <span>{{ row.salaryType | salaryFilter}} </span>
         </template>
       </el-table-column>
       <el-table-column
@@ -142,7 +155,7 @@
         width="100"
       >
         <template slot-scope="{row}">
-          <el-tag :type="row.status | companyStatusFilter">
+          <el-tag :type="row.status | employeeStatusFilter">
             {{ row.status }}
           </el-tag>
         </template>
@@ -154,125 +167,150 @@
         class-name="fixed-width"
       >
         <template slot-scope="{row, $index}">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)">
-            {{ $t("table.edit") }}
+          <el-button
+            type="primary"
+            size="mini"
+            @click="handleUpdate(row)"
+          >
+            {{ $t('table.edit') }}
           </el-button>
           <el-button
-            v-if="row.status !== 'active'"
+            v-if="row.status!=='active'"
             size="mini"
             type="success"
-            @click="handleModifyStatus(row, 'active')"
+            @click="handleModifyStatus(row,'active')"
           >
-            {{ $t("table.active") }}
+            {{ $t('table.active') }}
           </el-button>
           <el-button
-            v-if="row.status !== 'passive'"
+            v-if="row.status!=='passive'"
             size="mini"
-            @click="handleModifyStatus(row, 'passive')"
+            @click="handleModifyStatus(row,'passive')"
           >
-            {{ $t("table.passive") }}
+            {{ $t('table.passive') }}
           </el-button>
           <el-button
-            v-if="row.status !== 'deleted' && row.status !== 'active' "
+            v-if="row.status!=='deleted' && row.status !== 'active'"
             size="mini"
             type="danger"
             @click="handleDelete(row, $index)"
           >
-            {{ $t("table.delete") }}
+            {{ $t('table.delete') }}
           </el-button>
         </template>
       </el-table-column>
     </el-table>
 
     <pagination
-      v-show="total > 0"
+      v-show="total>0"
       :total="total"
       :page.sync="listQuery.page"
       :limit.sync="listQuery.limit"
       @pagination="getList"
     />
 
-    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
+    <el-dialog
+      :title="textMap[dialogStatus]"
+      :visible.sync="dialogFormVisible"
+    >
       <el-form
         ref="dataForm"
         :rules="rules"
-        :model="tempCompanyData"
+        :model="tempEmployeeData"
         label-position="left"
         label-width="100px"
-        style="width: 400px; margin-left: 50px"
+        style="width: 400px; margin-left:50px;"
       >
-
-        <el-upload
-          action="#"
-          list-type="picture-card"
-          :auto-upload="false"
-          :on-change="toggleUpload"
-          :on-remove="toggleUpload"
-          :class="{hideUpload: !showUpload}" >
-            <i slot="default" class="el-icon-plus"></i>
-            <div slot="file" slot-scope="{file}">
-              <img
-                class="el-upload-list__item-thumbnail"
-                :src="file.url" alt=""
-              >
-            </div>
-        </el-upload>
         <el-form-item
-          :label="$t('table.companyname')"
-          prop="companyname"
+          :label="$t('table.id')"
+          prop="id"
+        >
+          <el-input v-model="tempEmployeeData.id" />
+        </el-form-item>
+                <el-form-item
+          :label="$t('table.salaryType')"
+          prop="salaryType"
+        >
+        <el-select
+          v-model="tempEmployeeData.salaryType"
+          class="filter-item"
+          placeholder="Lütfen Seçim yapınız"
+        >
+          <el-option
+            v-for="item in calendarTypeOptions"
+            :key="item.key"
+            :label="item.displayName"
+            :value="item.key"
+          />
+        </el-select>
+        </el-form-item>
+        <el-form-item
+          :label="$t('table.username')"
+          prop="username"
           label-width="100"
         >
-          <el-input v-model="tempCompanyData.companyname" />
+          <el-input v-model="tempEmployeeData.username" />
         </el-form-item>
 
         <el-form-item
-          :label="$t('table.vkn')"
+          :label="$t('table.expenseCenter')"
           prop="expenseCenter"
           label-width="100"
         >
-          <el-input v-model="tempCompanyData.vkn" />
+          <el-input v-model="tempEmployeeData.expenseCenter" />
         </el-form-item>
         <el-form-item
-          :label="$t('table.address')"
-          prop="address"
+            :label="$t('table.employeeClass')"
+            prop="employeeClass"
+            label-width="100"
+          >
+          <el-input v-model="tempEmployeeData.employeeClass" />
+        </el-form-item>
+        <el-form-item
+          :label="$t('table.salary')"
+          prop="salary"
           label-width="100"
         >
-          <el-input v-model="tempCompanyData.address" />
+          <el-input v-model="tempEmployeeData.salary" />
         </el-form-item>
         <el-form-item
           :label="$t('table.status')"
           prop="status"
           label-width="100"
         >
-          <el-tag :type="tempCompanyData.status | companyStatusFilter">
-            {{ tempCompanyData.status }}
+          <el-tag :type="tempEmployeeData.status | employeeStatusFilter">
+            {{ tempEmployeeData.status }}
           </el-tag>
         </el-form-item>
+
       </el-form>
-      <div slot="footer" class="dialog-footer">
+      <div
+        slot="footer"
+        class="dialog-footer"
+      >
         <el-button
-          v-if="tempCompanyData.status !== 'aktif'"
-          size="mini"
-          type="success"
-          @click="handleModifyStatus(tempCompanyData, 'aktif')"
-        >
-          {{ $t("table.active") }}
+            v-if="tempEmployeeData.status!=='aktif'"
+            size="mini"
+            type="success"
+            @click="handleModifyStatus(tempEmployeeData,'aktif')"
+          >
+            {{ $t('table.active') }}
         </el-button>
         <el-button
-          v-if="tempCompanyData.status !== 'pasif'"
-          size="mini"
-          @click="handleModifyStatus(tempCompanyData, 'pasif')"
-        >
-          {{ $t("table.passive") }}
-        </el-button>
+            v-if="tempEmployeeData.status!=='pasif'"
+            size="mini"
+            @click="handleModifyStatus(tempEmployeeData,'pasif')"
+          >
+            {{ $t('table.passive') }}
+          </el-button>
         <el-button @click="dialogFormVisible = false">
-          {{ $t("table.cancel") }}
+          {{ $t('table.cancel') }}
         </el-button>
         <el-button
           type="primary"
-          @click="dialogStatus === 'create' ? createData() : updateData()"
+          @click="dialogStatus==='create'?createData():updateData()"
         >
-          {{ $t("table.confirm") }}
+          {{ $t('table.confirm') }}
         </el-button>
       </div>
     </el-dialog>
@@ -284,39 +322,55 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { Form } from 'element-ui'
 import { cloneDeep } from 'lodash'
-import { getCompanies, createCompany, updateCompany, defaultCompanyData } from '@/api/companies'
-import { ICompanyData } from '@/api/types'
+import { getEmployees, createEmployee, updateEmployee, defaultEmployeeData } from '@/api/employees'
+import { IEmployeeData } from '@/api/types'
 import { exportJson2Excel } from '@/utils/excel'
 import { formatJson } from '@/utils'
 import Pagination from '@/components/Pagination/index.vue'
 
+const calendarTypeOptions = [
+  { key: 'HO', displayName: 'Saatlik' },
+  { key: 'DY', displayName: 'Günlük' },
+  { key: 'MO', displayName: 'Aylık' },
+  { key: 'YE', displayName: 'Yıllık' }
+]
+
 // TODO: uyarı ve excel colonlarının lang destegı ekle
 
+const calendarTypeKeyValue = calendarTypeOptions.reduce((acc: { [key: string]: string }, cur) => {
+  acc[cur.key] = cur.displayName
+  return acc
+}, {}) as { [key: string]: string }
+
 @Component({
-  name: 'company-management',
+  name: 'employee-management',
   components: {
     Pagination
+  },
+  filters: {
+    salaryFilter: (type: string) => {
+      return calendarTypeKeyValue[type]
+    }
   }
 })
 export default class extends Vue {
   private tableKey = 0
-  private list: ICompanyData[] = []
+  private list: IEmployeeData[] = []
   private total = 0
   private listLoading = true
-  private showUpload = true
   private listQuery = {
     page: 1,
     limit: 20,
-    vkn: undefined,
     status: undefined,
-    companyname: undefined,
-    address: undefined,
+    username: undefined,
+    salaryType: undefined,
     sort: '+id'
   }
 
+  private calendarTypeOptions = calendarTypeOptions
   private sortOptions = [
-    { label: 'Id artan', key: '+id' },
-    { label: 'Id azalan', key: '-id' }
+    { label: 'Sicil No artan', key: '+id' },
+    { label: 'Sicil No azalan', key: '-id' }
   ]
 
   private statusOptions = ['active', 'passive', 'deleted']
@@ -329,11 +383,12 @@ export default class extends Vue {
   }
 
   private rules = {
-    companyname: [{ required: true, message: 'title is required', trigger: 'blur' }]
+    salaryType: [{ required: true, message: 'type is required', trigger: 'change' }],
+    username: [{ required: true, message: 'title is required', trigger: 'blur' }]
   }
 
   private downloadLoading = false
-  private tempCompanyData = defaultCompanyData
+  private tempEmployeeData = defaultEmployeeData
 
   created() {
     this.getList()
@@ -341,7 +396,7 @@ export default class extends Vue {
 
   private async getList() {
     this.listLoading = true
-    const { data } = await getCompanies(this.listQuery)
+    const { data } = await getEmployees(this.listQuery)
     this.list = data.items
     this.total = data.total
     // Just to simulate the time of the request
@@ -384,12 +439,12 @@ export default class extends Vue {
     return sort === `+${key}` ? 'ascending' : 'descending'
   }
 
-  private resettempCompanyData() {
-    this.tempCompanyData = cloneDeep(defaultCompanyData)
+  private resettempEmployeeData() {
+    this.tempEmployeeData = cloneDeep(defaultEmployeeData)
   }
 
   private handleCreate() {
-    this.resettempCompanyData()
+    this.resettempEmployeeData()
     this.dialogStatus = 'create'
     this.dialogFormVisible = true
     this.$nextTick(() => {
@@ -397,18 +452,13 @@ export default class extends Vue {
     })
   }
 
-  toggleUpload() {
-    this.showUpload = !this.showUpload
-  }
-
   private createData() {
     (this.$refs.dataForm as Form).validate(async(valid) => {
       if (valid) {
-        const companyData = this.tempCompanyData
-        companyData.id = Math.round(Math.random() * 100) + 1024 // mock a id
-        const { data } = await createCompany({ company: companyData })
-        console.log(data)
-        this.list.unshift(data.company)
+        const employeeData = this.tempEmployeeData
+        employeeData.id = Math.round(Math.random() * 100) + 1024 // mock a id
+        const { data } = await createEmployee({ employee: employeeData })
+        this.list.unshift(data.employee)
         this.dialogFormVisible = false
         this.$notify({
           title: 'success',
@@ -421,7 +471,7 @@ export default class extends Vue {
   }
 
   private handleUpdate(row: any) {
-    this.tempCompanyData = Object.assign({}, row)
+    this.tempEmployeeData = Object.assign({}, row)
     this.dialogStatus = 'update'
     this.dialogFormVisible = true
     this.$nextTick(() => {
@@ -432,13 +482,13 @@ export default class extends Vue {
   private updateData() {
     (this.$refs.dataForm as Form).validate(async(valid) => {
       if (valid) {
-        const tempData = Object.assign({}, this.tempCompanyData)
+        const tempData = Object.assign({}, this.tempEmployeeData)
 
-        console.log(tempData.id, { company: tempData })
-        const { data } = await updateCompany(tempData.id, { company: tempData })
-        const index = this.list.findIndex(v => v.id === data.company.id)
+        console.log(tempData.id, { employee: tempData })
+        const { data } = await updateEmployee(tempData.id, { employee: tempData })
+        const index = this.list.findIndex(v => v.id === data.employee.id)
 
-        this.list.splice(index, 1, data.company)
+        this.list.splice(index, 1, data.employee)
         this.dialogFormVisible = false
         this.$notify({
           title: 'Success',
@@ -462,8 +512,8 @@ export default class extends Vue {
 
   private handleDownload() {
     this.downloadLoading = true
-    const tHeader = ['id', 'companyname', 'vkn', 'address', 'status']
-    const filterVal = ['id', 'companyname', 'vkn', 'address', 'status']
+    const tHeader = ['id', 'username', 'salary', 'salaryType', 'expenseCenter', 'employeeClass', 'status']
+    const filterVal = ['id', 'username', 'salary', 'salaryType', 'expenseCenter', 'employeeClass', 'status']
     const data = formatJson(filterVal, this.list)
     exportJson2Excel(tHeader, data, 'table-list')
     this.downloadLoading = false

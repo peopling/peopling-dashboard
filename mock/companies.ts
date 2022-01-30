@@ -1,4 +1,4 @@
-import faker from 'faker'
+import faker, { fake } from 'faker'
 import { Response, Request } from 'express'
 import { ICompanyData } from '../src/api/types'
 
@@ -11,7 +11,8 @@ for (let i = 0; i < companyCount; i++) {
     status: faker.random.arrayElement(['active', 'passive', 'deleted']),
     companyname: faker.company.companyName(),
     address: faker.address.streetAddress() + faker.address.city() + faker.address.country(),
-    vkn: faker.datatype.number({ min: 10000, max: 90000 }).toString()
+    vkn: faker.datatype.number({ min: 10000, max: 90000 }).toString(),
+    logoUrl: 'favicon.ico'
   })
 }
 
@@ -39,6 +40,17 @@ export const getCompanies = (req: Request, res: Response) => {
       total: mockList.length,
       items: pageList
     }
+  })
+}
+
+export const getCompanyById = (req: Request, res: Response) => {
+  const { id } = req.query
+
+  const mockList = companyList.filter(item => item.id === id as any)
+
+  return res.json({
+    code: 20000,
+    data: mockList
   })
 }
 

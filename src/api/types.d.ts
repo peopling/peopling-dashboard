@@ -32,6 +32,7 @@ export interface ICompanyData {
   vkn: string
   address: string
   status: string
+  logoUrl: string
 }
 
 export interface IRoleData {

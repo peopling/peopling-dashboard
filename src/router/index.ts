@@ -692,6 +692,25 @@ const asyncModulesRoutes: RouteConfig[] = [
 
 const asyncPeoplingRoutes: RouteConfig[] = [
   {
+    path: '/employee-management',
+    component: Layout,
+    redirect: 'noredirect',
+    meta: {
+      roles: ['peopling-admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import(/* webpackChunkName: "user-management" */ '@/views/employee-management/index.vue'),
+        name: 'Employee-Management',
+        meta: {
+          title: 'employeeManagement',
+          icon: 'peoples'
+        }
+      }
+    ]
+  },
+  {
     path: '/user-management',
     component: Layout,
     redirect: 'noredirect',
@@ -702,14 +721,15 @@ const asyncPeoplingRoutes: RouteConfig[] = [
       {
         path: 'index',
         component: () => import(/* webpackChunkName: "user-management" */ '@/views/user-management/index.vue'),
-        name: 'User-Management',
+        name: 'user-Management',
         meta: {
           title: 'userManagement',
-          icon: 'peoples'
+          icon: 'user'
         }
       }
     ]
-  }, {
+  },
+  {
     path: '/company-management',
     component: Layout,
     redirect: 'noredirect',
