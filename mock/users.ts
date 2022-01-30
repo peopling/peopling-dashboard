@@ -22,7 +22,7 @@ const userList: IUserData[] = [
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     introduction: 'I am an editor',
     email: 'editor@test.com',
-    phone: '1234567890',
+    phone: '1234567890111',
     roles: ['editor']
   },
   {
@@ -35,7 +35,7 @@ const userList: IUserData[] = [
     email: 'peopling@test.com',
     phone: '1234567890',
     roles: ['peopling-admin']
-  },
+  }
 ]
 const userCount = 100
 
@@ -63,6 +63,7 @@ export const login = (req: Request, res: Response) => {
   const { username } = req.body
   for (const user of userList) {
     if (user.username === username) {
+      console.log(username)
       return res.json({
         code: 20000,
         data: {
@@ -102,7 +103,7 @@ export const getUserInfo = (req: Request, res: Response) => {
   return res.json({
     code: 20000,
     data: {
-      user: req.header('X-Access-Token') === 'admin-token' ? userList[0] : (req.header('X-Access-Token')  === 'peopling-admin-token' ? userList[2] : userList[1])
+      user: req.header('X-Access-Token') === 'admin-token' ? userList[0] : (req.header('X-Access-Token') === 'peopling-admin-token' ? userList[2] : userList[1])
     }
   })
 }

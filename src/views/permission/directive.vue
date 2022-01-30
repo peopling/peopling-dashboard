@@ -7,7 +7,7 @@
     >
       <div>
         <span
-          v-permission="['admin']"
+          v-permission="['peopling-admin']"
           class="permission-alert"
         >
           Only
@@ -138,7 +138,7 @@ import SwitchRoles from './components/SwitchRoles.vue'
   }
 })
 export default class extends Vue {
-  private key = 1 // 为了能每次切换权限的时候重新初始化指令
+  private key = 1
   private checkPermission = checkPermission
 
   private handleRolesChange() {

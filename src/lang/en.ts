@@ -60,9 +60,16 @@ export default {
     exportZip: 'Export Zip',
     theme: 'Theme',
     clipboard: 'Clipboard',
+    employeeManagement: 'Employee Management',
+    companyManagement: 'Company Management',
+    budgetManagement: 'Budget Management',
+    reports: 'Reports',
+    parameters: 'Parameters',
     i18n: 'I18n',
     externalLink: 'External Link',
-    profile: 'Profile'
+    profile: 'Profile',
+    username: 'Name Surname',
+    userManagement: 'User Management'
   },
   navbar: {
     logOut: 'Log Out',
@@ -122,17 +129,28 @@ export default {
     export: 'Export',
     reviewer: 'Reviewer',
     id: 'ID',
+    companyId: 'ID',
     date: 'Date',
     author: 'Author',
     readings: 'Readings',
     status: 'Status',
+    salary: 'Salary',
+    salaryType: 'Salary Type',
+    expenseCenter: 'Expense Center',
+    employeeClass: 'Employee Class',
     actions: 'Actions',
     edit: 'Edit',
     publish: 'Publish',
     draft: 'Draft',
     delete: 'Delete',
     cancel: 'Cancel',
-    confirm: 'Confirm'
+    confirm: 'Confirm',
+    active: 'Active',
+    passive: 'Passive',
+    vkn: 'Tax identification number',
+    companyname: 'Company Name',
+    address: 'Address',
+    logo: 'Logo'
   },
   example: {
     warning: 'Creating and editing pages cannot be cached by keep-alive because keep-alive\'s \'include\' currently does not support caching based on routes, so now it\'s cached based on component name. If you want to achieve a similar caching effect, you can use a browser caching scheme such as localStorage. Or don\'t use keep-alive\'s \'include\' to cache all pages directly. See details'

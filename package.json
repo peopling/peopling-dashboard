@@ -4,7 +4,7 @@
   "private": true,
   "author": "Mert Demirok<mertdemirok@outlook.com>",
   "scripts": {
-    "serve": " concurrently \"npm:mock\" \"vue-cli-service serve --mode production\" ",
+    "serve": " concurrently \"npm:mock\" \"vue-cli-service serve --mode development\" ",
     "test:unit": "jest --clearCache && vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "build:prod": "vue-cli-service build",
