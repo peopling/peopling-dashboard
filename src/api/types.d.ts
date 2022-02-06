@@ -83,6 +83,7 @@ export interface IParametersAndVariablesData {
   year: string
   parent: string
   parenttype: string
+  // eslint-disable-next-line no-use-before-define
   data: Details[]
 }
 
