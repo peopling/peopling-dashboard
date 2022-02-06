@@ -33,6 +33,7 @@ export interface ICompanyData {
   address: string
   status: string
   logoUrl: string
+  substation: string
 }
 
 export interface IRoleData {
@@ -60,4 +61,37 @@ export interface IUserData {
   avatar: string
   introduction: string
   roles: string[]
+  status: string
+}
+export interface IParameterData {
+  id: number
+  username: string
+  password: string
+  name: string
+  email: string
+  phone: string
+  avatar: string
+  introduction: string
+  roles: string[]
+  status: string
+}
+
+export interface IParametersAndVariablesData {
+  title: string
+  type: string
+  key: string
+  year: string
+  parent: string
+  parenttype: string
+  data: Details[]
+}
+
+export interface Details {
+  key: string
+  title: string
+  type: string
+  value: string
+  includeSgk?: boolean
+  isToWorkRate?: boolean
+  anyRezerv?: boolean
 }

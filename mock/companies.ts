@@ -12,6 +12,7 @@ for (let i = 0; i < companyCount; i++) {
     companyname: faker.company.companyName(),
     address: faker.address.streetAddress() + faker.address.city() + faker.address.country(),
     vkn: faker.datatype.number({ min: 10000, max: 90000 }).toString(),
+    substation: faker.company.suffixes() + ' ' + faker.company.companyName(),
     logoUrl: 'favicon.ico'
   })
 }
@@ -19,7 +20,6 @@ for (let i = 0; i < companyCount; i++) {
 export const getCompanies = (req: Request, res: Response) => {
   const { companyname, status, address, vkn, page = 1, limit = 20, sort } = req.query
 
-  console.log(req.query)
   let mockList = companyList.filter(item => {
     if (vkn && item.vkn.toLocaleLowerCase().indexOf((vkn as string).toLocaleLowerCase()) < 0) return false
     if (address && item.address.toLocaleLowerCase().indexOf((address as string).toLocaleLowerCase()) < 0) return false

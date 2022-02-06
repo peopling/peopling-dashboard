@@ -25,7 +25,6 @@ service.interceptors.request.use(
 // Response interceptors
 service.interceptors.response.use(
   (response) => {
-    console.log(response)
     // Some example codes here:
     // code == 20000: success
     // code == 50001: invalid access token

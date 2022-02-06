@@ -484,7 +484,6 @@ export default class extends Vue {
       if (valid) {
         const tempData = Object.assign({}, this.tempEmployeeData)
 
-        console.log(tempData.id, { employee: tempData })
         const { data } = await updateEmployee(tempData.id, { employee: tempData })
         const index = this.list.findIndex(v => v.id === data.employee.id)
 

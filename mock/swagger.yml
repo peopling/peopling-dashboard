@@ -859,6 +859,7 @@ paths:
                     properties:
                       routes:
                         $ref: '#/components/schemas/Role/properties/routes'
+
   /users:
     get:
       tags:
@@ -894,6 +895,39 @@ paths:
                           $ref: '#/components/schemas/User'
         401:
           $ref: '#/components/responses/Unauthorized'
+    post:
+      tags:
+        - users
+      summary: Create New user
+      description: Create a new user.
+      operationId: createUser
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: user
+          in: query
+          required: true
+          description: The data for new user.
+          schema:
+            $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/User'
+        401:
+          $ref: '#/components/responses/Unauthorized' 
   /users/register:
     post:
       tags:

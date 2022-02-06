@@ -22,7 +22,7 @@ Vue.use(VueRouter)
                                  detail see : https://vuejs.org/v2/guide/components-dynamic-async.html#keep-alive-with-Dynamic-Components
   redirect:                      if set to 'noredirect', no redirect action will be trigger when clicking the breadcrumb
   meta: {
-    roles: ['admin', 'editor']   will control the page roles (allow setting multiple roles)
+    roles: ['developer-admin', 'editor']   will control the page roles (allow setting multiple roles)
     title: 'title'               the name showed in subMenu and breadcrumb (recommend set)
     icon: 'svg-name'             the icon showed in the sidebar
     hidden: true                 if true, this route will not show in the sidebar (default is false)
@@ -151,7 +151,7 @@ export const asyncRoutes: RouteConfig[] = [
     meta: {
       title: 'permission',
       icon: 'lock',
-      roles: ['admin'] // you can set roles in root nav
+      roles: ['developer-admin'] // you can set roles in root nav
       // ,alwaysShow: true // will always show the root menu
     },
     children: [
@@ -161,7 +161,7 @@ export const asyncRoutes: RouteConfig[] = [
         name: 'PagePermission',
         meta: {
           title: 'pagePermission',
-          roles: ['admin'] // or you can only set roles in sub nav
+          roles: ['developer-admin'] // or you can only set roles in sub nav
         }
       },
       {
@@ -179,7 +179,7 @@ export const asyncRoutes: RouteConfig[] = [
         name: 'RolePermission',
         meta: {
           title: 'rolePermission',
-          roles: ['admin']
+          roles: ['developer-admin']
         }
       }
     ]
@@ -188,7 +188,7 @@ export const asyncRoutes: RouteConfig[] = [
     path: '/icon',
     component: Layout,
     meta: {
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -210,7 +210,7 @@ export const asyncRoutes: RouteConfig[] = [
     meta: {
       title: 'example',
       icon: 'example',
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -248,7 +248,7 @@ export const asyncRoutes: RouteConfig[] = [
     path: '/tab',
     component: Layout,
     meta: {
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -269,7 +269,7 @@ export const asyncRoutes: RouteConfig[] = [
     meta: {
       title: 'errorPages',
       icon: '404',
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -297,7 +297,7 @@ export const asyncRoutes: RouteConfig[] = [
     component: Layout,
     redirect: 'noredirect',
     meta: {
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -318,7 +318,7 @@ export const asyncRoutes: RouteConfig[] = [
     meta: {
       title: 'excel',
       icon: 'excel',
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -354,7 +354,7 @@ export const asyncRoutes: RouteConfig[] = [
     meta: {
       title: 'zip',
       icon: 'zip',
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -370,7 +370,7 @@ export const asyncRoutes: RouteConfig[] = [
     component: Layout,
     redirect: '/pdf/index',
     meta: {
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -394,7 +394,7 @@ export const asyncRoutes: RouteConfig[] = [
     component: Layout,
     redirect: 'noredirect',
     meta: {
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -413,7 +413,7 @@ export const asyncRoutes: RouteConfig[] = [
     component: Layout,
     redirect: 'noredirect',
     meta: {
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -431,7 +431,7 @@ export const asyncRoutes: RouteConfig[] = [
     path: '/i18n',
     component: Layout,
     meta: {
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -461,7 +461,7 @@ const asyncModulesRoutes: RouteConfig[] = [
     meta: {
       title: 'components',
       icon: 'component',
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -558,7 +558,7 @@ const asyncModulesRoutes: RouteConfig[] = [
     meta: {
       title: 'charts',
       icon: 'chart',
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -598,7 +598,7 @@ const asyncModulesRoutes: RouteConfig[] = [
     meta: {
       title: 'nested',
       icon: 'nested',
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {
@@ -659,7 +659,7 @@ const asyncModulesRoutes: RouteConfig[] = [
     meta: {
       title: 'table',
       icon: 'table',
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {

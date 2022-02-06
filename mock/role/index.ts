@@ -6,8 +6,8 @@ import { IRoleData } from '../../src/api/types'
 const routes = [...constantRoutes, ...asyncRoutes]
 const roles: IRoleData[] = [
   {
-    key: 'admin',
-    name: 'admin',
+    key: 'developer-admin',
+    name: 'developer-admin',
     description: 'Super Administrator. Have access to view all pages.',
     routes: routes
   },

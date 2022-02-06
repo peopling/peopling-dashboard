@@ -407,7 +407,6 @@ export default class extends Vue {
         const companyData = this.tempCompanyData
         companyData.id = Math.round(Math.random() * 100) + 1024 // mock a id
         const { data } = await createCompany({ company: companyData })
-        console.log(data)
         this.list.unshift(data.company)
         this.dialogFormVisible = false
         this.$notify({

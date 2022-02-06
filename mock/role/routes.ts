@@ -59,7 +59,7 @@ export const asyncRoutes = [
     meta: {
       title: 'permission',
       icon: 'lock',
-      roles: ['admin', 'peopling-admin'],
+      roles: ['developer-admin', 'peopling-admin'],
       alwaysShow: true
     },
     children: [
@@ -69,7 +69,7 @@ export const asyncRoutes = [
         name: 'PagePermission',
         meta: {
           title: 'pagePermission',
-          roles: ['admin', 'peopling-admin']
+          roles: ['developer-admin', 'peopling-admin']
         }
       },
       {
@@ -86,7 +86,7 @@ export const asyncRoutes = [
         name: 'RolePermission',
         meta: {
           title: 'rolePermission',
-          roles: ['admin', 'peopling-admin']
+          roles: ['developer-admin', 'peopling-admin']
         }
       }
     ]
@@ -310,7 +310,7 @@ export const asyncRoutes = [
     meta: {
       title: 'table',
       icon: 'table',
-      roles: ['admin']
+      roles: ['developer-admin']
     },
     children: [
       {

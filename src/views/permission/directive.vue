@@ -17,11 +17,11 @@
           >admin</el-tag> can see this
         </span>
         <el-tag
-          v-permission="['admin']"
+          v-permission="['developer-admin']"
           class="permission-sourceCode"
           type="info"
         >
-          v-permission="['admin']"
+          v-permission="['developer-admin']"
         </el-tag>
       </div>
 
@@ -47,7 +47,7 @@
 
       <div>
         <span
-          v-permission="['admin','editor']"
+          v-permission="['developer-admin','editor']"
           class="permission-alert"
         >
           Both
@@ -61,11 +61,11 @@
           >editor</el-tag> can see this
         </span>
         <el-tag
-          v-permission="['admin','editor']"
+          v-permission="['developer-admin','editor']"
           class="permission-sourceCode"
           type="info"
         >
-          v-permission="['admin','editor']"
+          v-permission="['developer-admin','editor']"
         </el-tag>
       </div>
     </div>
@@ -84,7 +84,7 @@
         style="width:550px;"
       >
         <el-tab-pane
-          v-if="checkPermission(['admin'])"
+          v-if="checkPermission(['developer-admin'])"
           label="Admin"
         >
           Admin can see this
@@ -92,7 +92,7 @@
             class="permission-sourceCode"
             type="info"
           >
-            v-if="checkPermission(['admin')"
+            v-if="checkPermission(['developer-admin')"
           </el-tag>
         </el-tab-pane>
 
@@ -110,7 +110,7 @@
         </el-tab-pane>
 
         <el-tab-pane
-          v-if="checkPermission(['admin','editor'])"
+          v-if="checkPermission(['developer-admin','editor'])"
           label="Admin-OR-Editor"
         >
           Both admin or editor can see this
@@ -118,7 +118,7 @@
             class="permission-sourceCode"
             type="info"
           >
-            v-if="checkPermission(['admin','editor'])"
+            v-if="checkPermission(['developer-admin','editor'])"
           </el-tag>
         </el-tab-pane>
       </el-tabs>
