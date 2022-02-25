@@ -63,28 +63,27 @@ export interface IUserData {
   roles: string[]
   status: string
 }
-export interface IParameterData {
-  id: number
-  username: string
-  password: string
-  name: string
-  email: string
-  phone: string
-  avatar: string
-  introduction: string
-  roles: string[]
-  status: string
-}
 
-export interface IParametersAndVariablesData {
+export interface IParameterData {
   title: string
   type: string
   key: string
-  year: string
+  year?: string
   parent: string
   parenttype: string
   // eslint-disable-next-line no-use-before-define
-  data: Details[]
+  details: Details[]
+}
+
+export interface IVariableData{
+  title: string
+  type: string
+  key: string
+  year?: string
+  parent: string
+  parenttype: string
+  // eslint-disable-next-line no-use-before-define
+  details: Details[]
 }
 
 export interface Details {
@@ -95,4 +94,10 @@ export interface Details {
   includeSgk?: boolean
   isToWorkRate?: boolean
   anyRezerv?: boolean
+}
+
+export interface IBudgetData {
+  id: number
+  name: string
+  status: string
 }

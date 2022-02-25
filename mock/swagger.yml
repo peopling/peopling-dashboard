@@ -437,6 +437,177 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         404:
           $ref: '#/components/responses/NotFound'
+  /parameters:
+    get:
+      tags:
+        - parameters
+      summary: Get parameter List
+      description: Return a list of parameters.
+      operationId: getParameters
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                        format: int32
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Parameter'
+    post:
+      tags:
+        - parameters
+      summary: Create New parameter
+      description: Create a new parameter.
+      operationId: createParameter
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: parameter
+          in: query
+          required: true
+          description: The data for new parameter.
+          schema:
+            $ref: '#/components/schemas/Parameter'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/Parameter'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+  /parameters/{id}:
+    get:
+      tags:
+        - parameters
+      summary: Get parameter Detail
+      description: Get parameter detail by ID.
+      operationId: getParameter
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: parameter id.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/Parameter'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+        - parameters
+      summary: Update parameter Detail
+      description: Update parameter deatail by ID.
+      operationId: updateParameter
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: parameter id.
+          schema:
+            type: integer
+            format: int64
+        - name: article
+          in: query
+          required: true
+          description: data for the updated parameter.
+          schema:
+            $ref: '#/components/schemas/Parameter'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/Parameter'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - parameters
+      summary: Delete parameters
+      description: Delete parameter by ID.
+      operationId: deleteparameter
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: parameter id.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
   /articles:
     get:
       tags:
@@ -859,7 +1030,6 @@ paths:
                     properties:
                       routes:
                         $ref: '#/components/schemas/Role/properties/routes'
-
   /users:
     get:
       tags:
@@ -1161,6 +1331,206 @@ paths:
                         $ref: '#/components/schemas/User'
         401:
           $ref: '#/components/responses/Unauthorized'
+  /budgets:
+    get:
+      tags:
+        - budgets
+      summary: Get budget List
+      description: Return a list of budgets.
+      operationId: getBudgets
+      parameters:
+        - name: username
+          in: query
+          description: Used to filter budgets by username.
+          schema:
+            $ref: '#/components/schemas/budget/properties/username'
+        - name: page
+          in: query
+          description: The wanted page number (one page).
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: limit
+          in: query
+          description: The maximum number of budgets returned for one page.
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+        - name: sort
+          in: query
+          description: Optional sorting order for budgets.
+          schema:
+            type: string
+            enum:
+              - +id
+              - -id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                        format: int32
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/budget'
+    post:
+      tags:
+        - budgets
+      summary: Create New budget
+      description: Create a new budget.
+      operationId: createBudget
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: budget
+          in: query
+          required: true
+          description: The data for new budget.
+          schema:
+            $ref: '#/components/schemas/budget'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/budget'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+  /budgets/{id}:
+    get:
+      tags:
+        - budgets
+      summary: Get budget Detail
+      description: Get budget detail by ID.
+      operationId: getBudget
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: budget id.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/Budget'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+        - budgets
+      summary: Update budget Detail
+      description: Update budget deatail by ID.
+      operationId: updateBudget
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: budget id.
+          schema:
+            type: integer
+            format: int64
+        - name: article
+          in: query
+          required: true
+          description: data for the updated budget.
+          schema:
+            $ref: '#/components/schemas/Budget'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      article:
+                        $ref: '#/components/schemas/Budget'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - budgets
+      summary: Delete budgets
+      description: Delete budget by ID.
+      operationId: deletebudget
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: budget id.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
 components:
   securitySchemes:
     AccessTokenAuth:

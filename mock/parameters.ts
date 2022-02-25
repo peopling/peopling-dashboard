@@ -1,77 +1,123 @@
-import faker, { name } from 'faker'
+import faker from 'faker'
 import { Response, Request } from 'express'
-import { IEmployeeData } from '../src/api/types'
+import { IParameterData, Details } from '../src/api/types'
 
-const employeeList: IEmployeeData [] = []
-const employeeCount = 200
+const parameterList: IParameterData [] = []
+const details: Details [] = []
 
-for (let i = 0; i < employeeCount; i++) {
-  employeeList.push({
-    id: i,
-    status: faker.random.arrayElement(['active', 'passive', 'deleted']),
-    username: faker.name.findName(),
-    employeeClass: faker.random.arrayElement(['1D', 'S12', '1C']),
-    expenseCenter: faker.datatype.number({ min: 1000000000, max: 9000000000 }).toString(),
-    salary: faker.finance.amount(),
-    salaryType: faker.random.arrayElement(['DY', 'MO', 'YE', 'HO'])
-  })
-}
+parameterList.push({
+  title: 'sgk parametreleri',
+  key: 'sgk-parameter',
+  parent: faker.datatype.number({ min: 1, max: 1000 }).toString(),
+  type: 'parameter',
+  parenttype: 'Company',
+  year: '2021',
+  details: [{
+    key: 'issizlik-orani',
+    title: 'işsizlik oranı',
+    type: 'percent',
+    value: '2,00'
+  },
+  {
+    key: 'sgk-orani',
+    title: 'sgk oranı',
+    type: 'percent',
+    value: '15,50'
+  },
+  {
+    key: 'sgk-tavanı-ocak',
+    title: 'sgk tavanı ocak',
+    type: 'money',
+    value: '1500'
+  }]
+},
+{
+  title: 'Saatlik çalışma',
+  type: 'parameter',
+  key: 'hourly-work',
+  year: '2021',
+  parent: '1',
+  parenttype: 'Company',
+  details: [
+    {
+      key: 'ocak',
+      title: 'Ocak',
+      type: 'monay',
+      value: '2000'
+    },
+    {
+      key: 'subat',
+      title: 'Şubat',
+      type: 'monay',
+      value: '2000'
+    }
+  ]
+},
+{
+  title: 'Masraf Merkezi',
+  type: 'parameter',
+  key: 'cost-center',
+  parent: '1',
+  parenttype: 'Company',
+  details: [
+    {
+      key: 'masraf-merkezi-no',
+      title: 'Masraf Merkezi',
+      type: 'text',
+      value: 'teststring'
+    },
+    {
+      key: 'masraf-merkezi-grubu',
+      title: 'Masraf Merkezi Grubu',
+      type: 'text',
+      value: 'teststring'
+    }
+  ]
+})
 
-export const getEmployees = (req: Request, res: Response) => {
-  const { username, status, salaryType, page = 1, limit = 20, sort } = req.query
-
-  let mockList = employeeList.filter(item => {
-    if (salaryType && item.salaryType !== salaryType) return false
-    if (username && item.username.toLocaleLowerCase().indexOf((username as string).toLocaleLowerCase()) < 0) return false
-    if (status && item.status !== status) return false
-    return true
-  })
-
-  if (sort === '-id') {
-    mockList = mockList.reverse()
-  }
-
-  const pageList = mockList.filter((_, index) => index < (limit as number) * (page as number) && index >= (limit as number) * (page as number - 1))
+export const getParameters = (req: Request, res: Response) => {
+// const { } = req.query
 
   return res.json({
     code: 20000,
     data: {
-      total: mockList.length,
-      items: pageList
+      items: parameterList
     }
   })
 }
 
-export const createEmployee = (req: Request, res: Response) => {
-  const { employee } = req.body
+export const createParameter = (req: Request, res: Response) => {
+  const { parameter } = req.body
+
+  parameterList.push(parameter)
   return res.json({
     code: 20000,
     data: {
-      employee
+      parameter
     }
   })
 }
 
-export const updateEmployee = (req: Request, res: Response) => {
-  const { id } = req.params
-  const { employee } = req.body
-  for (const v of employeeList) {
-    if (v.id.toString() === id) {
+export const updateParameter = (req: Request, res: Response) => {
+  const { key } = req.params
+  const { parameter } = req.body
+  for (const v of parameterList) {
+    if (v.key.toString() === key) {
       return res.json({
         code: 20000,
         data: {
-          employee
+          parameter
         }
       })
     }
   }
   return res.json({
     code: 70001,
-    message: 'Employee not found'
+    message: 'parameter not found'
   })
 }
 
-export const deleteEmployee = (req: Request, res: Response) => {
+export const deleteParameter = (req: Request, res: Response) => {
   return res.json({
     code: 20000
   })

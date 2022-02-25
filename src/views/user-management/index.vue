@@ -277,8 +277,6 @@ import { Form } from 'element-ui'
 import { cloneDeep } from 'lodash'
 import { getUsers, createUser, updateUser, defaultUserData } from '@/api/users'
 import { IUserData, IRoleData } from '@/api/types'
-import { exportJson2Excel } from '@/utils/excel'
-import { formatJson } from '@/utils'
 import Pagination from '@/components/Pagination/index.vue'
 
 @Component({
