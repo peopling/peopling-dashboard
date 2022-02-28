@@ -768,6 +768,25 @@ const asyncPeoplingRoutes: RouteConfig[] = [
     ]
   },
   {
+    path: '/variables',
+    component: Layout,
+    redirect: 'noredirect',
+    meta: {
+      roles: ['peopling-admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import(/* webpackChunkName: "clipboard" */ '@/views/variables/index.vue'),
+        name: 'variables',
+        meta: {
+          title: 'variables',
+          icon: 'component'
+        }
+      }
+    ]
+  },
+  {
     path: '/budget-managment',
     component: Layout,
     redirect: 'noredirect',

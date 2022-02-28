@@ -184,7 +184,7 @@ import { getParameters, defaultParameterData, getParameter, updateParameter, cre
 import { IParameterData, Details } from '@/api/types'
 
 @Component({
-  name: 'parameters',
+  name: 'variables',
   components: {
     EditableCell
   },

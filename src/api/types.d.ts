@@ -65,6 +65,7 @@ export interface IUserData {
 }
 
 export interface IParameterData {
+  id: number
   title: string
   type: string
   key: string
@@ -76,6 +77,7 @@ export interface IParameterData {
 }
 
 export interface IVariableData{
+  id: number
   title: string
   type: string
   key: string

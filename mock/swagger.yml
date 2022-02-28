@@ -582,7 +582,7 @@ paths:
         - parameters
       summary: Delete parameters
       description: Delete parameter by ID.
-      operationId: deleteparameter
+      operationId: deleteParameter
       security:
         - AccessTokenAuth: []
       parameters:

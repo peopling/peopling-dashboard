@@ -66,6 +66,7 @@ export default {
     employeeManagement: 'Çalışan Yönetimi',
     companyManagement: 'Şirket Yönetimi',
     parameters: 'Parametreler',
+    variables: 'Değişkenler',
     budgetManagement: 'Bütçe Yönetimi',
     reports: 'Raporlar',
     userManagement: 'Kullanıcı Yönetimi'

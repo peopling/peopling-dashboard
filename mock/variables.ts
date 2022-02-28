@@ -7,20 +7,85 @@ const details: Details [] = []
 
 variableList.push(
   {
+    id: 1,
     title: 'Çıplak Maaş',
     type: 'variable',
-    key: 'ciplak-maas',
+    key: 'bare-salary',
     parent: '1',
     parenttype: 'Company',
     details: [
       {
-        key: 'çiplak-maas-deger',
-        title: 'Çıplak Maas Değer',
+        key: 'bare-salary-value',
+        title: 'Çıplak Maas Değeri',
         type: 'percent',
         value: '50',
         includeSgk: true,
         isToWorkRate: true,
         anyRezerv: true
+      },
+      {
+        key: 'çiplak-maas-deger',
+        title: 'bare-pay-value',
+        type: 'percent',
+        value: '50',
+        includeSgk: true,
+        isToWorkRate: true,
+        anyRezerv: true
+      }
+    ]
+  }, {
+    id: 2,
+    title: 'Muhasebe Kod Tanımı',
+    type: 'variable',
+    key: 'accounting-code-definition',
+    parent: '1',
+    parenttype: 'Company',
+    details: [
+      {
+        key: 'employee-type',
+        title: 'Personel Türü',
+        type: 'text',
+        value: 'Mavi Yaka'
+      },
+      {
+        key: 'cost-center-group',
+        title: 'Masraf Merkezi Grubu',
+        type: 'text',
+        value: '720'
+      },
+      {
+        key: 'account-code',
+        title: 'Hesap Kodu',
+        type: 'text',
+        value: '511628366'
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: 'Muhasebe Kod Tanımı',
+    type: 'variable',
+    key: 'accounting-code-definition',
+    parent: '1',
+    parenttype: 'Company',
+    details: [
+      {
+        key: 'employee-type',
+        title: 'Personel Türü',
+        type: 'text',
+        value: 'Geçici Personel'
+      },
+      {
+        key: 'cost-center-group',
+        title: 'Masraf Merkezi Grubu',
+        type: 'text',
+        value: '720'
+      },
+      {
+        key: 'account-code',
+        title: 'Hesap Kodu',
+        type: 'text',
+        value: '511628354'
       }
     ]
   })
@@ -31,6 +96,7 @@ export const getVariables = (req: Request, res: Response) => {
   return res.json({
     code: 20000,
     data: {
+      total: variableList.length,
       items: variableList
     }
   })
@@ -49,10 +115,15 @@ export const createVariable = (req: Request, res: Response) => {
 }
 
 export const updateVariable = (req: Request, res: Response) => {
-  const { key } = req.params
+  const { id } = req.params
   const { variable } = req.body
   for (const v of variableList) {
-    if (v.key.toString() === key) {
+    if (v.id.toString() === id) {
+      v.details = variable.details
+      v.key = variable.key
+      v.title = variable.title
+      v.type = variable.title
+
       return res.json({
         code: 20000,
         data: {
@@ -63,11 +134,19 @@ export const updateVariable = (req: Request, res: Response) => {
   }
   return res.json({
     code: 70001,
-    message: 'Variable not found'
+    message: 'parameter not found'
   })
 }
 
 export const deleteVariable = (req: Request, res: Response) => {
+  const { id } = req.params
+
+  for (let i = 0; i < variableList.length; i++) {
+    if (variableList[i].id === Number(id)) {
+      variableList.splice(i, 1)
+    }
+  }
+
   return res.json({
     code: 20000
   })

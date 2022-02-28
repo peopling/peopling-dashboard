@@ -2,6 +2,7 @@ import request from '@/utils/request'
 import { IParameterData, Details } from './types'
 
 export const defaultParameterData: IParameterData = {
+  id: 0,
   key: '',
   parent: '',
   parenttype: '',
@@ -46,6 +47,6 @@ export const updateParameter = (id: number, data: any) =>
 
 export const deleteParameter = (id: number) =>
   request({
-    url: `/Parameters/${id}`,
+    url: `/parameters/${id}`,
     method: 'delete'
   })
