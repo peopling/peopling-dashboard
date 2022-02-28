@@ -65,6 +65,7 @@ export default {
     budgetManagement: 'Budget Management',
     reports: 'Reports',
     parameters: 'Parameters',
+    variables: 'Variables',
     i18n: 'I18n',
     externalLink: 'External Link',
     profile: 'Profile',
