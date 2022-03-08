@@ -119,7 +119,7 @@
         align="center"
       >
         <template slot-scope="{row}">
-          <span>{{ row.salary }}</span>
+          <span>{{ row.salary }} ₺</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -270,8 +270,8 @@
           :label="$t('table.salary')"
           prop="salary"
           label-width="100"
-        >
-          <el-input v-model="tempEmployeeData.salary" />
+        >  <el-badge > (₺) </el-badge>
+           <el-input v-model="tempEmployeeData.salary" />
         </el-form-item>
         <el-form-item
           :label="$t('table.status')"

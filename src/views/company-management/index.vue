@@ -201,22 +201,21 @@
         label-width="100px"
         style="width: 400px; margin-left: 50px"
       >
-
-        <el-upload
-          action="#"
-          list-type="picture-card"
-          :auto-upload="false"
-          :on-change="toggleUpload"
-          :on-remove="toggleUpload"
-          :class="{hideUpload: !showUpload}" >
-            <i slot="default" class="el-icon-plus"></i>
-            <div slot="file" slot-scope="{file}">
-              <img
-                class="el-upload-list__item-thumbnail"
-                :src="file.url" alt=""
-              >
-            </div>
-        </el-upload>
+       <el-form-item
+          :label="$t('table.logoUrl')"
+          prop="logoUrl"
+          label-width="100"
+        >
+            <el-upload
+              class="avatar-uploader"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload">
+                <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+        </el-form-item>
         <el-form-item
           :label="$t('table.companyname')"
           prop="companyname"
@@ -278,7 +277,31 @@
     </el-dialog>
   </div>
 </template>
-
+<style scoped >
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+</style>
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
@@ -291,7 +314,7 @@ import { formatJson } from '@/utils'
 import Pagination from '@/components/Pagination/index.vue'
 
 // TODO: uyarı ve excel colonlarının lang destegı ekle
-
+// TODO: image yukleme cross orgin hatası var duzelt
 @Component({
   name: 'company-management',
   components: {
@@ -313,6 +336,8 @@ export default class extends Vue {
     address: undefined,
     sort: '+id'
   }
+
+  public imageUrl = ''
 
   private sortOptions = [
     { label: 'Id artan', key: '+id' },
@@ -397,14 +422,12 @@ export default class extends Vue {
     })
   }
 
-  toggleUpload() {
-    this.showUpload = !this.showUpload
-  }
-
   private createData() {
     (this.$refs.dataForm as Form).validate(async(valid) => {
       if (valid) {
+        this.tempCompanyData.logoUrl = this.imageUrl
         const companyData = this.tempCompanyData
+
         companyData.id = Math.round(Math.random() * 100) + 1024 // mock a id
         const { data } = await createCompany({ company: companyData })
         this.list.unshift(data.company)
@@ -433,6 +456,7 @@ export default class extends Vue {
       if (valid) {
         const tempData = Object.assign({}, this.tempCompanyData)
 
+        tempData.logoUrl = this.imageUrl
         console.log(tempData.id, { company: tempData })
         const { data } = await updateCompany(tempData.id, { company: tempData })
         const index = this.list.findIndex(v => v.id === data.company.id)
@@ -466,6 +490,25 @@ export default class extends Vue {
     const data = formatJson(filterVal, this.list)
     exportJson2Excel(tHeader, data, 'table-list')
     this.downloadLoading = false
+  }
+
+  private handleAvatarSuccess(res: any, file: any) {
+    console.log('handleAvatarSuccess', res, file)
+    this.imageUrl = URL.createObjectURL(file.raw)
+  }
+
+  private beforeAvatarUpload(file: any) {
+    console.log('beforeAvatarUpload', file)
+    const isJPG = file.type === 'image/jpeg'
+    const isLt2M = file.size / 1024 / 1024 < 2
+
+    if (!isJPG) {
+      this.$message.error('Avatar picture must be JPG format!')
+    }
+    if (!isLt2M) {
+      this.$message.error('Avatar picture size can not exceed 2MB!')
+    }
+    return isJPG && isLt2M
   }
 }
 </script>

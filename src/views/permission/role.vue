@@ -121,6 +121,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import { RouteConfig } from 'vue-router'
 import { Tree } from 'element-ui'
 import { getRoutes, getRoles, createRole, deleteRole, updateRole } from '@/api/roles'
+import { checkPermission } from '@/utils/permission' // Use permission directly
 
 interface IRole {
   key: number
@@ -158,6 +159,8 @@ export default class extends Vue {
     label: 'title'
   }
 
+  private checkPermission = checkPermission
+
   get routesTreeData() {
     return this.generateTreeData(this.reshapedRoutes)
   }
@@ -171,8 +174,20 @@ export default class extends Vue {
   private async getRoutes() {
     const { data } = await getRoutes({ /* Your params here */ })
     console.log(data)
-    this.serviceRoutes = data.routes
-    this.reshapedRoutes = this.reshapeRoutes(data.routes)
+    const routes = []
+    if (checkPermission(['peopling-admin'])) {
+      for (let index = 0; index < data.routes.length; index++) {
+        const roles = data.routes[index]?.meta?.roles
+        if (roles !== undefined && roles.length > 0) {
+          routes.push(data.routes[index])
+        }
+      }
+      this.serviceRoutes = routes
+      this.reshapedRoutes = this.reshapeRoutes(routes)
+    } else {
+      this.serviceRoutes = data.routes
+      this.reshapedRoutes = this.reshapeRoutes(data.routes)
+    }
   }
 
   private async getRoles() {
@@ -188,7 +203,7 @@ export default class extends Vue {
         title: '',
         path: ''
       }
-      
+
       tmp.title = this.$t(`route.${route.meta?.title}`).toString()
       tmp.path = route.path
       if (route.children) {
@@ -351,7 +366,7 @@ export default class extends Vue {
 }
 </script>
 
-<style lang="scss" scoped> 
+<style lang="scss" scoped>
 .app-container {
   .roles-table {
     margin-top: 30px;

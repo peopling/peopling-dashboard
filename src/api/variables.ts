@@ -15,7 +15,8 @@ export const defaultVariableData: IVariableData = {
     value: '',
     anyRezerv: false,
     includeSgk: false,
-    isToWorkRate: false
+    isToWorkRate: false,
+    variableGroup: ''
   }]
 }
 

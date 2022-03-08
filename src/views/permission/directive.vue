@@ -71,6 +71,7 @@
     </div>
 
     <div
+      v-if="checkPermission(['developer-admin'])"
       :key="'checkPermission'+key"
       style="margin-top:60px;"
     >

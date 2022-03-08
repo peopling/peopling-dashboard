@@ -276,6 +276,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import { Form } from 'element-ui'
 import { cloneDeep } from 'lodash'
 import { getUsers, createUser, updateUser, defaultUserData } from '@/api/users'
+import { getRoutes, getRoles, createRole, deleteRole, updateRole } from '@/api/roles'
 import { IUserData, IRoleData } from '@/api/types'
 import Pagination from '@/components/Pagination/index.vue'
 
@@ -454,8 +455,15 @@ export default class extends Vue {
     this.list.splice(index, 1)
   }
 
-  private getRoles() {
+  /**  private getRoles() {
     this.roleList = [{ key: 'developer-admin', name: 'developer admin' }, { key: 'peopling-admin', name: 'peopling admin' }, { key: 'visitor', name: 'visitor' }]
+
+    this.selectedRoles = this.tempUserData.roles
+  } */
+
+  private async getRoles() {
+    const { data } = await getRoles({ /* Your params here */ })
+    this.roleList = data.items
 
     this.selectedRoles = this.tempUserData.roles
   }

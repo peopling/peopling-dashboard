@@ -151,7 +151,7 @@ export const asyncRoutes: RouteConfig[] = [
     meta: {
       title: 'permission',
       icon: 'lock',
-      roles: ['developer-admin'] // you can set roles in root nav
+      roles: ['developer-admin', 'peopling-admin'] // you can set roles in root nav
       // ,alwaysShow: true // will always show the root menu
     },
     children: [
@@ -169,7 +169,8 @@ export const asyncRoutes: RouteConfig[] = [
         component: () => import(/* webpackChunkName: "permission-directive" */ '@/views/permission/directive.vue'),
         name: 'DirectivePermission',
         meta: {
-          title: 'directivePermission'
+          title: 'directivePermission',
+          roles: ['developer-admin'] // or you can only set roles in sub nav
           // if do not set roles, means: this page does not require permission
         }
       },
@@ -178,8 +179,9 @@ export const asyncRoutes: RouteConfig[] = [
         component: () => import(/* webpackChunkName: "permission-role" */ '@/views/permission/role.vue'),
         name: 'RolePermission',
         meta: {
+          icon: 'lock',
           title: 'rolePermission',
-          roles: ['developer-admin']
+          roles: ['developer-admin', 'peopling-admin']
         }
       }
     ]

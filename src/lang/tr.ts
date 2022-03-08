@@ -3,10 +3,10 @@ export default {
     dashboard: 'Dashboard',
     documentation: 'Documentation',
     guide: 'Guide',
-    permission: 'Permission',
-    pagePermission: 'Page Permission',
-    rolePermission: 'Role Permission',
-    directivePermission: 'Directive Permission',
+    permission: 'Yetkiler',
+    pagePermission: 'Sayfa Yetkileri',
+    rolePermission: 'Rol Yetkileri',
+    directivePermission: 'Talimat Yetkileri',
     icons: 'Icons',
     components: 'Components',
     tinymce: 'Tinymce',
@@ -94,8 +94,8 @@ export default {
   permission: {
     createRole: 'Yeni Rol',
     editPermission: 'Güncelle',
-    roles: 'Your roles',
-    switchRoles: 'Switch roles',
+    roles: 'Senin Rolün',
+    switchRoles: 'Rolü Değiş',
     tips: 'In some cases, using v-permission will have no effect. For example: Element-UI  el-tab or el-table-column and other scenes that dynamically render dom. You can only do this with v-if.',
     delete: 'Silindi',
     confirm: 'Onayla',
@@ -156,7 +156,13 @@ export default {
     name: 'Kullanıcı İsmi',
     email: 'Email',
     phone: 'Telefon No',
-    roles: 'Roller'
+    roles: 'Roller',
+    includeSgk: 'SGK Dahil',
+    isToWorkRate: 'Çalışmaya Oranlı mı',
+    anyRezerv: 'Rezerv var mı',
+    variableGroup: 'Değişken Grubu',
+    calculateType: 'Hesaplama Türü'
+
   },
   example: {
     warning: 'Creating and editing pages cannot be cached by keep-alive because keep-alive\'s \'include\' currently does not support caching based on routes, so now it\'s cached based on component name. If you want to achieve a similar caching effect, you can use a browser caching scheme such as localStorage. Or don\'t use keep-alive\'s \'include\' to cache all pages directly. See details'

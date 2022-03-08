@@ -96,6 +96,7 @@ export interface Details {
   includeSgk?: boolean
   isToWorkRate?: boolean
   anyRezerv?: boolean
+  variableGroup?: string
 }
 
 export interface IBudgetData {

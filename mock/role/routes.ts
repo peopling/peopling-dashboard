@@ -48,6 +48,24 @@ export const constantRoutes = [
         }
       }
     ]
+  },
+  {
+    path: '/profile',
+    component: 'Layout',
+    redirect: '/profile/index',
+    meta: { hidden: true },
+    children: [
+      {
+        path: 'index',
+        component: '/views/profile/index',
+        name: 'Profile',
+        meta: {
+          title: 'profile',
+          icon: 'user',
+          noCache: true
+        }
+      }
+    ]
   }
 ]
 
@@ -58,9 +76,7 @@ export const asyncRoutes = [
     redirect: '/permission/index',
     meta: {
       title: 'permission',
-      icon: 'lock',
-      roles: ['developer-admin', 'peopling-admin'],
-      alwaysShow: true
+      icon: 'lock'
     },
     children: [
       {
@@ -69,7 +85,7 @@ export const asyncRoutes = [
         name: 'PagePermission',
         meta: {
           title: 'pagePermission',
-          roles: ['developer-admin', 'peopling-admin']
+          roles: ['developer-admin']
         }
       },
       {
@@ -77,7 +93,8 @@ export const asyncRoutes = [
         component: 'views/permission/directive',
         name: 'DirectivePermission',
         meta: {
-          title: 'directivePermission'
+          title: 'directivePermission',
+          roles: ['developer-admin'] // or you can only set roles in sub nav
         }
       },
       {
@@ -309,8 +326,7 @@ export const asyncRoutes = [
     name: 'Table',
     meta: {
       title: 'table',
-      icon: 'table',
-      roles: ['developer-admin']
+      icon: 'table'
     },
     children: [
       {
@@ -573,5 +589,162 @@ export const asyncRoutes = [
     path: '*',
     redirect: '/404',
     meta: { hidden: true }
+  }
+]
+
+export const asyncPeoplingRoutes = [
+  {
+    path: '/employee-management',
+    component: 'Layout',
+    redirect: 'noredirect',
+    meta: {
+      roles: ['peopling-admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: 'views/employee-management/index',
+        name: 'Employee-Management',
+        meta: {
+          title: 'employeeManagement',
+          icon: 'peoples'
+        }
+      }
+    ]
+  },
+  {
+    path: '/user-management',
+    component: 'Layout',
+    redirect: 'noredirect',
+    meta: {
+      roles: ['peopling-admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: 'views/user-management/index.vue',
+        name: 'user-Management',
+        meta: {
+          title: 'userManagement',
+          icon: 'user'
+        }
+      }
+    ]
+  },
+  {
+    path: '/company-management',
+    component: 'Layout',
+    redirect: 'noredirect',
+    meta: {
+      roles: ['peopling-admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: 'views/company-management/index',
+        name: 'company-management',
+        meta: {
+          title: 'companyManagement',
+          icon: 'international'
+        }
+      }
+    ]
+  },
+  {
+    path: '/parameters',
+    component: 'Layout',
+    redirect: 'noredirect',
+    meta: {
+      roles: ['peopling-admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: 'views/parameters/index',
+        name: 'parameters',
+        meta: {
+          title: 'parameters',
+          icon: 'nested'
+        }
+      }
+    ]
+  },
+  {
+    path: '/variables',
+    component: 'Layout',
+    redirect: 'noredirect',
+    meta: {
+      roles: ['peopling-admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: 'views/variables/index',
+        name: 'variables',
+        meta: {
+          title: 'variables',
+          icon: 'component'
+        }
+      }
+    ]
+  },
+  {
+    path: '/budget-managment',
+    component: 'Layout',
+    redirect: 'noredirect',
+    meta: {
+      roles: ['peopling-admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: 'views/budget-managment/index',
+        name: 'budget-managment',
+        meta: {
+          title: 'budgetManagement',
+          icon: 'money'
+        }
+      }
+    ]
+  }, {
+    path: '/reports',
+    component: 'Layout',
+    redirect: 'noredirect',
+    meta: {
+      roles: ['peopling-admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: 'views/reports/index',
+        name: 'reports',
+        meta: {
+          title: 'reports',
+          icon: 'skill'
+        }
+      }
+    ]
+  },
+  {
+    path: '/permission',
+    component: 'Layout',
+    redirect: '/permission/index',
+    meta: {
+      title: 'permission',
+      icon: 'lock',
+      roles: ['developer-admin', 'peopling-admin']
+      // alwaysShow: true
+    },
+    children: [
+      {
+        path: 'role',
+        component: 'views/permission/role',
+        name: 'RolePermission',
+        meta: {
+          title: 'rolePermission',
+          roles: ['developer-admin', 'peopling-admin']
+        }
+      }
+    ]
   }
 ]

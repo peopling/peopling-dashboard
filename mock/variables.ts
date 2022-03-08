@@ -16,31 +16,14 @@ variableList.push(
     details: [
       {
         key: 'bare-salary-value',
-        title: 'Çıplak Maas Değeri',
+        title: 'Çıplak Maaş',
         type: 'percent',
-        value: '50',
+        value: '',
         includeSgk: true,
         isToWorkRate: true,
-        anyRezerv: true
+        anyRezerv: true,
+        variableGroup: 'Maaş'
       },
-      {
-        key: 'çiplak-maas-deger',
-        title: 'bare-pay-value',
-        type: 'percent',
-        value: '50',
-        includeSgk: true,
-        isToWorkRate: true,
-        anyRezerv: true
-      }
-    ]
-  }, {
-    id: 2,
-    title: 'Muhasebe Kod Tanımı',
-    type: 'variable',
-    key: 'accounting-code-definition',
-    parent: '1',
-    parenttype: 'Company',
-    details: [
       {
         key: 'employee-type',
         title: 'Personel Türü',
@@ -58,34 +41,6 @@ variableList.push(
         title: 'Hesap Kodu',
         type: 'text',
         value: '511628366'
-      }
-    ]
-  },
-  {
-    id: 3,
-    title: 'Muhasebe Kod Tanımı',
-    type: 'variable',
-    key: 'accounting-code-definition',
-    parent: '1',
-    parenttype: 'Company',
-    details: [
-      {
-        key: 'employee-type',
-        title: 'Personel Türü',
-        type: 'text',
-        value: 'Geçici Personel'
-      },
-      {
-        key: 'cost-center-group',
-        title: 'Masraf Merkezi Grubu',
-        type: 'text',
-        value: '720'
-      },
-      {
-        key: 'account-code',
-        title: 'Hesap Kodu',
-        type: 'text',
-        value: '511628354'
       }
     ]
   })
