@@ -8,6 +8,7 @@ const employeeCount = 200
 for (let i = 0; i < employeeCount; i++) {
   employeeList.push({
     id: i,
+    companyId: 1,
     status: faker.random.arrayElement(['active', 'passive', 'deleted']),
     username: faker.name.findName(),
     employeeClass: faker.random.arrayElement(['1D', 'S12', '1C']),

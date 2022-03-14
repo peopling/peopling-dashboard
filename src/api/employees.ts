@@ -3,6 +3,7 @@ import { IEmployeeData } from './types'
 
 export const defaultEmployeeData: IEmployeeData = {
   id: 0,
+  companyId: 0,
   username: '',
   salary: '',
   salaryType: '',

@@ -18,6 +18,7 @@ export interface IArticleData {
 
 export interface IEmployeeData {
   id: number
+  companyId: number
   username: string
   salary:string
   salaryType: string

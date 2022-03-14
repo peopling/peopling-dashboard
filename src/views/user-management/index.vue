@@ -111,7 +111,7 @@
         align="center"
       >
         <template slot-scope="{row}">
-          <span>{{ row.roles }}</span>
+          <span>{{ selectedRoleItems(row.roles) }}</span>
         </template>
       </el-table-column>
 
@@ -121,7 +121,7 @@
         width="100"
       >
         <template slot-scope="{row}">
-          <el-tag :type="row.status | companyStatusFilter">
+          <el-tag :type="row.status | userStatusFilter">
             {{ row.status }}
           </el-tag>
         </template>
@@ -235,24 +235,24 @@
           prop="status"
           label-width="100"
         >
-          <el-tag :type="tempUserData.status | companyStatusFilter">
+          <el-tag :type="tempUserData.status | userStatusFilter">
             {{ tempUserData.status }}
           </el-tag>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button
-          v-if="tempUserData.status !== 'aktif'"
+          v-if="tempUserData.status !== 'active'"
           size="mini"
           type="success"
-          @click="handleModifyStatus(tempUserData, 'aktif')"
+          @click="handleModifyStatus(tempUserData, 'active')"
         >
           {{ $t("table.active") }}
         </el-button>
         <el-button
-          v-if="tempUserData.status !== 'pasif'"
+          v-if="tempUserData.status !== 'passive'"
           size="mini"
-          @click="handleModifyStatus(tempUserData, 'pasif')"
+          @click="handleModifyStatus(tempUserData, 'passive')"
         >
           {{ $t("table.passive") }}
         </el-button>
@@ -350,12 +350,14 @@ export default class extends Vue {
     this.getList()
   }
 
-  private handleModifyStatus(row: any, status: string) {
+  private async handleModifyStatus(row: any, status: string) {
     this.$message({
       message: 'Status Change Successfully',
       type: 'success'
     })
     row.status = status
+    const tempData = Object.assign({}, row)
+    const { data } = await updateUser(tempData.username, { user: tempData })
   }
 
   private sortChange(data: any) {
@@ -395,6 +397,14 @@ export default class extends Vue {
 
   toggleUpload() {
     this.showUpload = !this.showUpload
+  }
+
+  private selectedRoleItems(keys: [any]) {
+    const roleStringList: string[] = []
+    keys.forEach((key: any) => {
+      roleStringList.push(this.roleList.filter(x => x.key === key)[0]?.name)
+    })
+    return roleStringList
   }
 
   private createData() {
@@ -454,12 +464,6 @@ export default class extends Vue {
     })
     this.list.splice(index, 1)
   }
-
-  /**  private getRoles() {
-    this.roleList = [{ key: 'developer-admin', name: 'developer admin' }, { key: 'peopling-admin', name: 'peopling admin' }, { key: 'visitor', name: 'visitor' }]
-
-    this.selectedRoles = this.tempUserData.roles
-  } */
 
   private async getRoles() {
     const { data } = await getRoles({ /* Your params here */ })

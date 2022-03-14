@@ -1,14 +1,16 @@
 import faker from 'faker'
 import { Response, Request } from 'express'
 import { IUserData } from '../src/api/types'
+import { AvatarGenerator } from 'random-avatar-generator'
 
+const generator = new AvatarGenerator()
 const userList: IUserData[] = [
   {
     id: 0,
     username: 'developer-admin',
-    password: 'any',
+    password: 'developer2022',
     name: 'Super Admin',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    avatar: generator.generateRandomAvatar('avatar'),
     introduction: 'I am a super administrator',
     email: 'admin@test.com',
     phone: '1234567890',
@@ -17,30 +19,30 @@ const userList: IUserData[] = [
   },
   {
     id: 1,
-    username: 'editor',
-    password: 'any',
-    name: 'Normal Editor',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    introduction: 'I am an editor',
-    email: 'editor@test.com',
-    phone: '1234567890111',
-    roles: ['editor'],
-    status: 'passive'
-  },
-  {
-    id: 2,
     username: 'peopling-admin',
-    password: 'any',
+    password: 'peopling2022',
     name: 'peopling Admin User',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    avatar: generator.generateRandomAvatar('avatar'),
     introduction: 'I am a peopling administrator',
     email: 'peopling@test.com',
     phone: '1234567890',
     roles: ['peopling-admin'],
     status: 'active'
+  },
+  {
+    id: 2,
+    username: 'editor',
+    password: '123456',
+    name: 'Normal Editor',
+    avatar: generator.generateRandomAvatar('avatar'),
+    introduction: 'I am an editor',
+    email: 'editor@test.com',
+    phone: '1234567890111',
+    roles: ['editor'],
+    status: 'passive'
   }
 ]
-const userCount = 10
+const userCount = 5
 
 for (let i = 3; i < userCount; i++) {
   userList.push({
@@ -48,12 +50,12 @@ for (let i = 3; i < userCount; i++) {
     username: 'user_' + faker.random.alphaNumeric(9),
     password: faker.random.alphaNumeric(20),
     name: faker.name.findName(),
-    avatar: faker.image.imageUrl(),
+    avatar: generator.generateRandomAvatar('avatar'),
     introduction: faker.lorem.sentence(20),
     email: faker.internet.email(),
     phone: faker.phone.phoneNumber(),
     roles: ['visitor'],
-    status: faker.random.arrayElement(['active', 'passive', 'deleted'])
+    status: faker.random.arrayElement(['active', 'passive'])
   })
 }
 
@@ -64,20 +66,22 @@ export const register = (req: Request, res: Response) => {
 }
 
 export const login = (req: Request, res: Response) => {
-  const { username } = req.body
+  const { username, password } = req.body
+  console.log(req.body)
   for (const user of userList) {
-    if (user.username === username) {
+    if (user.username === username && user.password === password) {
       return res.json({
         code: 20000,
         data: {
+          user: user,
           accessToken: username + '-token'
         }
       })
     }
   }
-  return res.status(400).json({
-    code: 50004,
-    messaege: 'Invalid User'
+  return res.status(200).json({
+    code: 50005,
+    message: 'username or password is incorrect'
   })
 }
 
@@ -123,11 +127,14 @@ export const createUser = (req: Request, res: Response) => {
 }
 
 export const getUserInfo = (req: Request, res: Response) => {
-  // Mock data based on access token
+  let user = {}
+
+  user = userList.filter(x => (x.username + '-token') === req.header('X-Access-Token'))[0]
+  console.log(user)
   return res.json({
     code: 20000,
     data: {
-      user: req.header('X-Access-Token') === 'developer-admin-token' ? userList[0] : (req.header('X-Access-Token') === 'peopling-admin-token' ? userList[2] : userList[1])
+      user: user
     }
   })
 }
@@ -146,15 +153,16 @@ export const getUserByName = (req: Request, res: Response) => {
   }
   return res.status(400).json({
     code: 50004,
-    messaege: 'Invalid User'
+    message: 'Invalid User'
   })
 }
 
 export const updateUser = (req: Request, res: Response) => {
   const { username } = req.params
   const { user } = req.body
-  for (const v of userList) {
-    if (v.username === username) {
+  for (let index = 0; index < userList.length; index++) {
+    if (userList[index].id === user.id) {
+      userList.splice(index, 1, Object.assign({}, user))
       return res.json({
         code: 20000,
         data: {
@@ -165,7 +173,7 @@ export const updateUser = (req: Request, res: Response) => {
   }
   return res.status(400).json({
     code: 50004,
-    messaege: 'Invalid User'
+    message: 'Invalid User'
   })
 }
 

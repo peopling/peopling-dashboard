@@ -36,26 +36,33 @@ service.interceptors.response.use(
     const res = response.data
 
     if (res.code !== 20000) {
-      Message({
-        message: res.message || 'Error',
-        type: 'error',
-        duration: 5 * 1000
-      })
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        MessageBox.confirm(
-          'Çıkış yaptınız, bu sayfada kalmak için iptal edebilir veya tekrar giriş yapabilirsiniz.',
-          'kesinlikle çıkış yap',
-          {
-            confirmButtonText: 'confrim',
-            cancelButtonText: 'cancel',
-            type: 'warning'
-          }
-        ).then(() => {
-          UserModule.ResetToken()
-          location.reload() // To prevent bugs from vue-router
+      if (res.code === 50005) {
+        Message({
+          message: res.message,
+          type: 'error',
+          duration: 5 * 1000
         })
+      } else {
+        Message({
+          message: res.message || 'Error',
+          type: 'error',
+          duration: 5 * 1000
+        })
+        if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
+          MessageBox.confirm(
+            'Çıkış yaptınız, bu sayfada kalmak için iptal edebilir veya tekrar giriş yapabilirsiniz.',
+            'kesinlikle çıkış yap',
+            {
+              confirmButtonText: 'confrim',
+              cancelButtonText: 'cancel',
+              type: 'warning'
+            }
+          ).then(() => {
+            UserModule.ResetToken()
+            location.reload() // To prevent bugs from vue-router
+          })
+        }
       }
-      return Promise.reject(new Error(res.message || 'Error'))
     } else {
       return response.data
     }

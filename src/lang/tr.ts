@@ -97,7 +97,7 @@ export default {
     roles: 'Senin Rolün',
     switchRoles: 'Rolü Değiş',
     tips: 'In some cases, using v-permission will have no effect. For example: Element-UI  el-tab or el-table-column and other scenes that dynamically render dom. You can only do this with v-if.',
-    delete: 'Silindi',
+    delete: 'Sil',
     confirm: 'Onayla',
     cancel: 'Iptal'
   },

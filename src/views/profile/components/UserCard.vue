@@ -4,7 +4,7 @@
       slot="header"
       class="clearfix"
     >
-      <span>About me</span>
+      <span>Hakkımda</span>
     </div>
 
     <div class="user-profile">
@@ -15,7 +15,7 @@
           :width="'100px'"
           :hoverable="false"
         >
-          <div>Hello</div>
+          <div>Merhaba</div>
           {{ user.roles }}
         </pan-thumb>
       </div>
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-
+<!--
     <div class="user-bio">
 
       <div class="user-skills user-bio-section">
@@ -58,6 +58,9 @@
         </div>
       </div>
     </div>
+
+ -->
+
   </el-card>
 </template>
 

@@ -21,7 +21,7 @@ export const updateRole = (id: number, data: any) =>
     data
   })
 
-export const deleteRole = (id: number) =>
+export const deleteRole = (id: any) =>
   request({
     url: `/roles/${id}`,
     method: 'delete'

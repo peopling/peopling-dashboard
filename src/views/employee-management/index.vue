@@ -289,17 +289,17 @@
         class="dialog-footer"
       >
         <el-button
-            v-if="tempEmployeeData.status!=='aktif'"
+            v-if="tempEmployeeData.status!=='active'"
             size="mini"
             type="success"
-            @click="handleModifyStatus(tempEmployeeData,'aktif')"
+            @click="handleModifyStatus(tempEmployeeData,'active')"
           >
             {{ $t('table.active') }}
         </el-button>
         <el-button
-            v-if="tempEmployeeData.status!=='pasif'"
+            v-if="tempEmployeeData.status!=='active'"
             size="mini"
-            @click="handleModifyStatus(tempEmployeeData,'pasif')"
+            @click="handleModifyStatus(tempEmployeeData,'passive')"
           >
             {{ $t('table.passive') }}
           </el-button>
